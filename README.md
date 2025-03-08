@@ -30,8 +30,6 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 ## Pre-requisites and Dependencies
 
-⟹ Does your module rely on other Sitecore modules or frameworks?
-
 - Sitecore Power shell
 - itextsharp.dll
 
@@ -42,12 +40,13 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 
 ### Configuration
-1. Go to /sitecore/system/Modules/Sitecore Flow/Assistants
-2. Right click on the item "Assistants" and create a new item "Style Guide"
-3. Give a name of a brand "ex" My brand, can be your famous home beer company . or ex a good one like "Heineken"
-4. On this Sitecore field , Upload the Style guide.
-5. Click on the 'Heineken Item" and on the ribbon "Analyze", click -> 'Process all changes"
-6. Check all the fields being filled
+1. Configure the API Key on "/sitecore/system/Modules/Sitecore Flow/Settings", also select the desired model.
+2. Go to /sitecore/system/Modules/Sitecore Flow/Assistants
+3. Right click on the item "Assistants" and create a new item "Style Guide"
+4. Give a name of a brand "ex" My brand, can be your famous home beer company . or ex a good one like "Heineken"
+5. On this Sitecore field , Upload the Style guide.
+6. Click on the 'Heineken Item" and on the ribbon "Analyze", click -> 'Process all changes"
+7. Check all the fields being filled
 
 ![configuration](docs/images/configuration.gif?raw=true "configuration")
 
