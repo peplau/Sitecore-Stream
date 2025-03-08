@@ -29,135 +29,12 @@ SharedFields:
     $assistantItem = $SitecoreContextItem
     
     ### Load Settings
-    Import-Function -Name LoadSettings
+    Import-Function -Name LoadSettings -Module "Sitecore Flow"
     
     ### Loop on the uploaded documents
     $documents = $assistantItem.Children | Where-Object { $_.TemplateID -eq $SitecoreFlow_Document_TemplateID }
     $documents = @($documents)
-    
-    # Retrieve API Key and Model from Sitecore Item
-    $settings = Get-Item -Path "master:{5AABD3AF-E072-4E16-8782-1934B0B56EF4}"
-    $apiKey = $settings["API Key"]
-    $modelItemId = $settings["Model"]
-    $modelItem = Get-Item -Path "master:$modelItemId"
-    $model = $modelItem["Model key"]
-    
-    
-    function Invoke-ChatGptExtraction($plainText, $apiKey, $model) {
-        $headers = @{
-            "Authorization" = "Bearer $apiKey"
-            "Content-Type"  = "application/json"
-        }
-    
-        # Remove special characters from plainText
-        $cleanPlainText = $plainText -replace '[^\w\s.,-]', ''
-    
-        $prompt = @"
-    Extract the following information from the text below as JSON:
-    {
-        "Brand Purpose": "",
-        "Brand History": "",
-        "Brand Benefits": "",
-        "Brand Context": "",
-        "Brand Beliefs and Benefits": "",
-        "Tone of Voice": "",
-        "Visual guidance": "",
-        "Image Style": ""
-    }
-    
-    Text:
-    $cleanPlainText
-    "@
-    
-        $body = @{
-            model = $model
-            messages = @(
-                @{
-                    role = "user"
-                    content = $prompt
-                }
-            )
-            temperature = 0
-        } | ConvertTo-Json -Depth 4 -Compress
-    
-        try {
-            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Headers $headers -Method Post -Body $body
-            return ($response.choices[0].message.content | ConvertFrom-Json)
-        }
-        catch {
-            Write-Host "Error calling ChatGPT API: $_"
-            return $null
-        }
-    }
-    
-    function Save-ExtractedContentToSitecore($item, $content) {
-        $item.Editing.BeginEdit()
-        try {
-            $item["Brand Purpose"]              = $content."Brand Purpose"
-            $item["Brand History"]              = $content."Brand History"
-            $item["Brand Benefits"]             = $content."Brand Benefits"
-            $item["Brand Context"]              = $content."Brand Context"
-            $item["Brand Beliefs and Benefits"] = $content."Brand Beliefs and Benefits"
-            $item["Tone of Voice"]              = $content."Tone of Voice"
-            $item["Visual guidance"]            = $content."Visual guidance"
-            $item["Image Style"]                = $content."Image Style"
-            Write-Host "Item updated successfully: $($item.Paths.FullPath)"
-        }
-        catch {
-            Write-Host "Error updating item $($item.Paths.FullPath): $_"
-        }
-        finally {
-            $item.Editing.EndEdit()
-        }
-    }
-     function Get-PlainTextFromPdf() {
-            param( 
-                [System.IO.Stream]$mediaStream,
-                [string]$fileName
-            )
-        
-            try {
-        
-                # Dynamically resolve itextsharp.dll path
-                $kernel = [Sitecore.Configuration.Settings]::GetSetting("LicenseFile")
-                $sitecoreWebRoot = [System.IO.Path]::GetDirectoryName($kernel)
-                $dllPath = Join-Path $sitecoreWebRoot "bin\itextsharp.dll"
-        
-                # Copy the PDF stream to a temporary file to avoid memory stream issues
-                $tempFilePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), $fileName)
-                $tempFile = [System.IO.File]::Create($tempFilePath)
-                $mediaStream.CopyTo($tempFile)
-                $tempFile.Close()
-        
-                $pdf = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $tempFilePath
-                
-                # Initialize the $plainText variable before usage
-                $plainText = New-Object System.Text.StringBuilder
-                
-            	for ($page = 1; $page -le $pdf.NumberOfPages; $page++){
-        	    	$text=[iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($pdf,$page)
-        	  	    [void]$plainText.AppendLine($text)
-        	    }	
-        	   
-        	    $pdf.Close()
-        	    
-        	    # Optionally remove the temporary file after extraction
-                Remove-Item -Path $tempFilePath -Force
-               
-                Write-Host  $plainText.ToString()
-                return $plainText.ToString()
-               
-            }
-            catch {
-                Write-Host "Error extracting text from PDF: $_"
-                if ($_.Exception.InnerException) {
-                    Write-Host "Inner Exception Details: $($_.Exception.InnerException.Message)"
-                }
-                return $null
-            }
-        }
-    
-    
+    $ind = 0;
     
     foreach ($docItem in $documents) {
         ### Get document to be processed
@@ -165,6 +42,12 @@ SharedFields:
         $mediaItem = Get-Item -Path "master:$documentPath"
     
         if (Test-BaseTemplate -Item $mediaItem -Template $SitecoreFlow_MediaFile_TemplateID) {
+            # Clean the fields if this is the first one 
+            if ($ind -eq 0){
+                Clear-ExtractedContentFromSitecore $assistantItem
+                $ind++;
+            }
+            
             # Get the media stream
             $mediaItem = [Sitecore.Data.Items.MediaItem]$mediaItem
             $media = [Sitecore.Resources.Media.MediaManager]::GetMedia($mediaItem)
@@ -219,11 +102,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a5be75e9-ed2b-4cc5-afdb-3e04ca6e2524"
+      Value: "d4143543-f65e-41d1-bbf0-9f7c3f9a8b54"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\jneto
+        sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T125306Z
+      Value: 20250308T162848Z
