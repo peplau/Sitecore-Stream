@@ -1,0 +1,101 @@
+﻿---
+ID: "e0d8c216-6bc3-4770-9465-a9ef0bf164fb"
+Parent: "be1e0ade-3425-437f-8ce9-fb6c7f58aa74"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: /sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Functions/Functions
+SharedFields:
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    Import-Function -Name Constants
+    
+    function Get-Settings {
+        $settings = Get-Item -Path master: -Query "$($SitecoreFlow_Settings_Path)//*[@@templateid='$($SitecoreFlow_Settings_TemplateID)']"
+        return $settings;
+    }
+    
+    function Get-SerializedItem() {
+        param(
+            $contextItem
+        )
+        $simplerObject = @{
+            ItemName = $contextItem.Name
+            Fields = @()
+        }
+        foreach($field in $contextItem.Fields){
+            $typedField = [Sitecore.Data.Fields.FieldTypeManager]::GetField($field)
+            if (($typedField -is [Sitecore.Data.Fields.TextField] -or $typedField -is [Sitecore.Data.Fields.HtmlField]) -and $field.Name.StartsWith("__") -ne $true){
+                $simplerObject.Fields += @{ $field.Name = $field.Value }
+            }
+        }
+        $serialized = $simplerObject | ConvertTo-Json
+        return $serialized
+    }
+    
+    function Get-FieldValue(){
+        param( $item, $fieldName, $defaultValue = "" )
+        $field = $item.Fields[$fieldName]
+        if ($field -eq $null){
+            return $defaultValue
+        }
+        return $field.Value
+    }
+    
+    function Get-MessageFromGpt(){
+        param( $system, $message, $apiKey, $model)
+        
+        $headers = @{
+            "Content-Type" = "application/json"
+            "Authorization" = "Bearer $($apiKey)"
+        }
+        $requestData = @{
+            model = $model
+            messages = @(
+                @{
+                    role = "system"
+                    content = $system
+                },
+                @{
+                    role = "user"
+                    content = $message
+                }
+            )
+            max_tokens = 1000
+        }
+        $body = $requestData | ConvertTo-Json -Depth 3
+        
+        try {
+            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Method Post -Headers $headers -Body $body
+            $responseData = $response.choices[0].message.content
+            return $responseData
+        }
+        catch {
+            return $null
+        }    
+    }
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250308T043922Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rpeplau
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rpeplau
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "9ed009cb-e385-40f6-92b4-39d08fbafdbf"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\rpeplau
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250308T044054Z
