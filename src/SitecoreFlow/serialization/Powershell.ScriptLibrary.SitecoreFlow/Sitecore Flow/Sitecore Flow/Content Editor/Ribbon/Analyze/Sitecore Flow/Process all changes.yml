@@ -34,26 +34,117 @@ SharedFields:
     ### Loop on the uploaded documents
     $documents = $assistantItem.Children | Where-Object { $_.TemplateID -eq $SitecoreFlow_Document_TemplateID }
     $documents = @($documents)
+    function Invoke-ChatGptExtraction($plainText, $apiKey) {
+        $headers = @{
+            "Authorization" = "Bearer $apiKey"
+            "Content-Type"  = "application/json"
+        }
     
-    function Get-PlainTextFromPdf(){
-        param( 
-            $mediaStream, $fileName
-        )
-            # Implement PDF text extractor
-            return $plainText
+        # Remove special characters from plainText
+        $cleanPlainText = $plainText -replace '[^\w\s.,-]', ''
+    
+        $prompt = @"
+    Extract the following information from the text below as JSON:
+    {
+        "Brand Purpose": "",
+        "Brand History": "",
+        "Brand Benefits": "",
+        "Brand Context": "",
+        "Brand Beliefs and Benefits": "",
+        "Tone of Voice": "",
+        "Visual guidance": "",
+        "Image Style": ""
+    }
+    
+    Text:
+    $cleanPlainText
+    "@
+    
+        $body = @{
+            model = "gpt-3.5-turbo"
+            messages = @(
+                @{
+                    role = "user"
+                    content = $prompt
+                }
+            )
+            temperature = 0
+        } | ConvertTo-Json -Depth 4 -Compress
+    
+        try {
+            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Headers $headers -Method Post -Body $body
+            return ($response.choices[0].message.content | ConvertFrom-Json)
         }
         catch {
-            Write-Host "Error: $_"
+            Write-Host "Error calling ChatGPT API: $_"
             return $null
-        }    
+        }
+    }
+    
+    function Save-ExtractedContentToSitecore($item, $content) {
+        $item.Editing.BeginEdit()
+        try {
+            $item["Brand Purpose"]              = $content."Brand Purpose"
+            $item["Brand History"]              = $content."Brand History"
+            $item["Brand Benefits"]             = $content."Brand Benefits"
+            $item["Brand Context"]              = $content."Brand Context"
+            $item["Brand Beliefs and Benefits"] = $content."Brand Beliefs and Benefits"
+            $item["Tone of Voice"]              = $content."Tone of Voice"
+            $item["Visual guidance"]            = $content."Visual guidance"
+            $item["Image Style"]                = $content."Image Style"
+            Write-Host "Item updated successfully: $($item.Paths.FullPath)"
+        }
+        catch {
+            Write-Host "Error updating item $($item.Paths.FullPath): $_"
+        }
+        finally {
+            $item.Editing.EndEdit()
+        }
     }
     
     
+    function Get-PlainTextFromPdf() {
+        param( 
+            [System.IO.Stream]$mediaStream,
+            [string]$fileName
+        )
     
+        try {
+          	Add-Type -Path "C:\inetpub\wwwroot\sc10hacsc.dev.local\bin\itextsharp.dll"
     
+            # Copy the PDF stream to a temporary file to avoid memory stream issues
+            $tempFilePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), $fileName)
+            $tempFile = [System.IO.File]::Create($tempFilePath)
+            $mediaStream.CopyTo($tempFile)
+            $tempFile.Close()
     
-    
-    
+            $pdf = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $tempFilePath
+            
+            # Initialize the $plainText variable before usage
+            $plainText = New-Object System.Text.StringBuilder
+            
+        	for ($page = 1; $page -le $pdf.NumberOfPages; $page++){
+    	    	$text=[iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($pdf,$page)
+    	  	    [void]$plainText.AppendLine($text)
+    	    }	
+    	   
+    	    $pdf.Close()
+    	    
+    	    # Optionally remove the temporary file after extraction
+            Remove-Item -Path $tempFilePath -Force
+           
+            Write-Host  $plainText.ToString()
+        return $plainText.ToString()
+           
+        }
+        catch {
+            Write-Host "Error extracting text from PDF: $_"
+            if ($_.Exception.InnerException) {
+                Write-Host "Inner Exception Details: $($_.Exception.InnerException.Message)"
+            }
+            return $null
+        }
+    }
     
     
     
@@ -69,11 +160,47 @@ SharedFields:
             $media = [Sitecore.Resources.Media.MediaManager]::GetMedia($mediaItem)
             $mediaStream = $media.GetStream().Stream
             
-            $plainText = Get-PlainTextFromGpt $apiKey $model $mediaStream "$($mediaItem.Name).$($mediaItem.Extension)"
+            #Extract plain text form PDF
+            $plainText = Get-PlainTextFromPdf $mediaStream "$($mediaItem.Name).$($mediaItem.Extension)"
+        
+            ### Get Plain Text from document and save on the document item
+    
+            #Starting editing the file to save the extracted text
+             if ($plainText -and $plainText.Trim() -ne "") {
+                # Start editing the item to save the extracted text
+                $docItem.Editing.BeginEdit()
+                try {
+                    $docItem["Plain Text"] = $plainText
+                    Write-Host "Plain Text updated successfully for item: $($docItem.Paths.FullPath)"
+                }
+                catch {
+                    Write-Host "Error updating item $($docItem.Paths.FullPath): $_"
+                }
+                finally {
+                    $docItem.Editing.EndEdit()
+                }
+                
+                # Call ChatGPT function to extract specific information
+                # Retrieve API Key from Sitecore Item
+                $settingsItem = Get-Item -Path "master:{5AABD3AF-E072-4E16-8782-1934B0B56EF4}"
+                $apiKey = $settingsItem["API Key"]
+                $model =  $settingsItem["Model"]
+    
+                $chatGptContent = Invoke-ChatGptExtraction -plainText $plainText -apiKey $apiKey
+    
+                if ($chatGptContent) {
+                    # Save extracted fields to Assistant item
+                    Save-ExtractedContentToSitecore -item $assistantItem -content $chatGptContent
+                }
+                
+            }
+            else {
+                Write-Host "No plain text extracted for item: $($docItem.Paths.FullPath)"
+            }
+            
         }    
     
         
-        ### Get Plain Text from document and save on the document item
         
         ### Get Information from document and save on the Assistant item    
     }
@@ -97,11 +224,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "92ba65ab-eb76-4208-ae00-c84eacf2805b"
+      Value: "cf0f0543-2cad-4bad-ad95-6813c2511b23"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\rpeplau
+        sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T074803Z
+      Value: 20250308T121855Z
