@@ -1,8 +1,8 @@
 ﻿---
-ID: "79aff43e-d535-44b0-a717-01ed6b4b398a"
-Parent: "81881544-e671-43f5-8712-b41ddaed3368"
+ID: "fa066117-490b-4f08-9dc9-1b11462a443c"
+Parent: "8ac6f954-c894-43f3-ac06-84d61991da0e"
 Template: "1db34c92-03b0-4475-9a39-da14e4d9d8fc"
-Path: /sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Process Assistantant changes
+Path: /sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Populate Assistantant
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
@@ -23,10 +23,10 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250308T194914Z
+      Value: 20250308T204900Z
     - ID: "4df6da21-e745-444c-956e-1d4a96ab8821"
       Hint: Header
-      Value: Process Assistantant changes
+      Value: Populate Assistantant
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -37,11 +37,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "f5b0d67f-1d94-4d63-9c54-d1121743a718"
+      Value: "5c2dd611-ad6f-4954-b8d8-71e7781fc020"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T194914Z
+      Value: 20250308T204900Z

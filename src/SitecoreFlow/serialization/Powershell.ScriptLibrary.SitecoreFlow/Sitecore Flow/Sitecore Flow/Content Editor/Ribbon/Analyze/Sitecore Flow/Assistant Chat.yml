@@ -47,8 +47,9 @@ SharedFields:
     
     # Open Chat
     $context = $serializedAssistant
-    $chatTitle = "Chat with Assistant"
-    $maxTokens = 10000
+    $assistantName = Get-FieldValue $assistantItem $SitecoreFlow_Assistant_Name_FieldName $null
+    $chatTitle = "$($assistantName) Assistant"
+    $maxTokens = 5000
     
     $embed = '<script>' +
             'var apikey="'+$apiKey+'"; ' +
@@ -57,14 +58,14 @@ SharedFields:
             'var chatTitle="'+$chatTitle+'"; ' +
             'var maxTokens='+$maxTokens+'; ' +
         '</script>' +
-        '<iframe width="100%" height="600" ' +
+        '<iframe width="100%" height="500" ' +
         'src="/sitecore%20modules/Sitecore%20Flow/SitecoreFlow.html" ' +
         'frameborder="0" allowfullscreen></iframe>'
      
     Read-Variable `
         -Parameters @{Name="embed"; Title=""; Editor="info" } `
-        -Width 800 -Height 600 `
-        -Title "Sitecore Flow" `
+        -Width 1000 -Height 500 `
+        -Title "Brand-Aware Assistant: $($assistantName)" `
         -Description " "
 Languages:
 - Language: en
@@ -84,11 +85,11 @@ Languages:
         sitecore\etonon_dev
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "97dae9e9-94ef-490d-bcfa-cafd5d67b750"
+      Value: "308d72e9-0e33-4ae3-b6ee-c8ac906697ef"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\etonon_dev
+        sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T203347Z
+      Value: 20250308T210941Z
