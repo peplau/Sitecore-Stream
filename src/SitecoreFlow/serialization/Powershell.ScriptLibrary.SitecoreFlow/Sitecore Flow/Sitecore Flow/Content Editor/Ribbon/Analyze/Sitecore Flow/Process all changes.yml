@@ -34,7 +34,16 @@ SharedFields:
     ### Loop on the uploaded documents
     $documents = $assistantItem.Children | Where-Object { $_.TemplateID -eq $SitecoreFlow_Document_TemplateID }
     $documents = @($documents)
-    function Invoke-ChatGptExtraction($plainText, $apiKey) {
+    
+    # Retrieve API Key and Model from Sitecore Item
+    $settings = Get-Item -Path "master:{5AABD3AF-E072-4E16-8782-1934B0B56EF4}"
+    $apiKey = $settings["API Key"]
+    $modelItemId = $settings["Model"]
+    $modelItem = Get-Item -Path "master:$modelItemId"
+    $model = $modelItem["Model key"]
+    
+    
+    function Invoke-ChatGptExtraction($plainText, $apiKey, $model) {
         $headers = @{
             "Authorization" = "Bearer $apiKey"
             "Content-Type"  = "application/json"
@@ -61,7 +70,7 @@ SharedFields:
     "@
     
         $body = @{
-            model = "gpt-3.5-turbo"
+            model = $model
             messages = @(
                 @{
                     role = "user"
@@ -101,78 +110,71 @@ SharedFields:
             $item.Editing.EndEdit()
         }
     }
-    
-    
-    function Get-PlainTextFromPdf() {
-        param( 
-            [System.IO.Stream]$mediaStream,
-            [string]$fileName
-        )
-    
-        try {
-    
-            # Dynamically resolve itextsharp.dll path
-            $kernel = [Sitecore.Configuration.Settings]::GetSetting("LicenseFile")
-            $sitecoreWebRoot = [System.IO.Path]::GetDirectoryName($kernel)
-            $dllPath = Join-Path $sitecoreWebRoot "bin\itextsharp.dll"
-    
-    
-            # Copy the PDF stream to a temporary file to avoid memory stream issues
-            $tempFilePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), $fileName)
-            $tempFile = [System.IO.File]::Create($tempFilePath)
-            $mediaStream.CopyTo($tempFile)
-            $tempFile.Close()
-    
-            $pdf = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $tempFilePath
-            
-            # Initialize the $plainText variable before usage
-            $plainText = New-Object System.Text.StringBuilder
-            
-        	for ($page = 1; $page -le $pdf.NumberOfPages; $page++){
-    	    	$text=[iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($pdf,$page)
-    	  	    [void]$plainText.AppendLine($text)
-    	    }	
-    	   
-    	    $pdf.Close()
-    	    
-    	    # Optionally remove the temporary file after extraction
-            Remove-Item -Path $tempFilePath -Force
-           
-            Write-Host  $plainText.ToString()
-        return $plainText.ToString()
-           
-        }
-        catch {
-            Write-Host "Error extracting text from PDF: $_"
-            if ($_.Exception.InnerException) {
-                Write-Host "Inner Exception Details: $($_.Exception.InnerException.Message)"
+     function Get-PlainTextFromPdf() {
+            param( 
+                [System.IO.Stream]$mediaStream,
+                [string]$fileName
+            )
+        
+            try {
+        
+                # Dynamically resolve itextsharp.dll path
+                $kernel = [Sitecore.Configuration.Settings]::GetSetting("LicenseFile")
+                $sitecoreWebRoot = [System.IO.Path]::GetDirectoryName($kernel)
+                $dllPath = Join-Path $sitecoreWebRoot "bin\itextsharp.dll"
+        
+                # Copy the PDF stream to a temporary file to avoid memory stream issues
+                $tempFilePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), $fileName)
+                $tempFile = [System.IO.File]::Create($tempFilePath)
+                $mediaStream.CopyTo($tempFile)
+                $tempFile.Close()
+        
+                $pdf = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $tempFilePath
+                
+                # Initialize the $plainText variable before usage
+                $plainText = New-Object System.Text.StringBuilder
+                
+            	for ($page = 1; $page -le $pdf.NumberOfPages; $page++){
+        	    	$text=[iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($pdf,$page)
+        	  	    [void]$plainText.AppendLine($text)
+        	    }	
+        	   
+        	    $pdf.Close()
+        	    
+        	    # Optionally remove the temporary file after extraction
+                Remove-Item -Path $tempFilePath -Force
+               
+                Write-Host  $plainText.ToString()
+                return $plainText.ToString()
+               
             }
-            return $null
+            catch {
+                Write-Host "Error extracting text from PDF: $_"
+                if ($_.Exception.InnerException) {
+                    Write-Host "Inner Exception Details: $($_.Exception.InnerException.Message)"
+                }
+                return $null
+            }
         }
-    }
     
     
     
     foreach ($docItem in $documents) {
-        
         ### Get document to be processed
         $documentPath = Get-FieldValue $docItem $SitecoreFlow_Document_Document_FieldName $null
         $mediaItem = Get-Item -Path "master:$documentPath"
-        
+    
         if (Test-BaseTemplate -Item $mediaItem -Template $SitecoreFlow_MediaFile_TemplateID) {
             # Get the media stream
             $mediaItem = [Sitecore.Data.Items.MediaItem]$mediaItem
             $media = [Sitecore.Resources.Media.MediaManager]::GetMedia($mediaItem)
             $mediaStream = $media.GetStream().Stream
-            
-            #Extract plain text form PDF
-            $plainText = Get-PlainTextFromPdf $mediaStream "$($mediaItem.Name).$($mediaItem.Extension)"
-        
-            ### Get Plain Text from document and save on the document item
     
-            #Starting editing the file to save the extracted text
-             if ($plainText -and $plainText.Trim() -ne "") {
-                # Start editing the item to save the extracted text
+            # Extract plain text from PDF
+            $plainText = Get-PlainTextFromPdf $mediaStream "$($mediaItem.Name).$($mediaItem.Extension)"
+    
+            if ($plainText -and $plainText.Trim() -ne "") {
+                # Save extracted text to Sitecore item
                 $docItem.Editing.BeginEdit()
                 try {
                     $docItem["Plain Text"] = $plainText
@@ -184,33 +186,21 @@ SharedFields:
                 finally {
                     $docItem.Editing.EndEdit()
                 }
-                
-                # Call ChatGPT function to extract specific information
-                # Retrieve API Key from Sitecore Item
-                $settingsItem = Get-Item -Path "master:{5AABD3AF-E072-4E16-8782-1934B0B56EF4}"
-                $apiKey = $settingsItem["API Key"]
-                $model =  $settingsItem["Model"]
     
-                $chatGptContent = Invoke-ChatGptExtraction -plainText $plainText -apiKey $apiKey
+                # Call ChatGPT function to extract specific information
+                $chatGptContent = Invoke-ChatGptExtraction -plainText $plainText -apiKey $apiKey -model $model
     
                 if ($chatGptContent) {
                     # Save extracted fields to Assistant item
                     Save-ExtractedContentToSitecore -item $assistantItem -content $chatGptContent
                 }
-                
             }
             else {
                 Write-Host "No plain text extracted for item: $($docItem.Paths.FullPath)"
             }
-            
-        }    
-    
-        
-        
-        ### Get Information from document and save on the Assistant item    
+        }
     }
     
-    Close-Window
 Languages:
 - Language: en
   Versions:
@@ -229,11 +219,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "93ba6b11-49c3-4d2e-a758-d5324cd608d9"
+      Value: "a5be75e9-ed2b-4cc5-afdb-3e04ca6e2524"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jneto
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T123149Z
+      Value: 20250308T125306Z
