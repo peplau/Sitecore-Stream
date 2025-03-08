@@ -1,15 +1,15 @@
 ﻿---
-ID: "3d4821c0-780e-4c78-bb35-0aea415a92b0"
-Parent: "00f9952a-81e9-453f-b673-7bc6af8452ea"
-Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: /sitecore/templates/Foundation/Sitecore Flow/Assistants/_Document/Document/Document
+ID: "da714c14-b270-477b-8b2a-b236f5a897ac"
+Parent: "dbe008de-ee21-4848-8fcf-360ddf88d383"
+Template: "3619f992-4177-4124-89dd-dabfc2baf6bb"
+Path: /sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Process all changes
 SharedFields:
-- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
-  Hint: Type
-  Value: File
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 100
+  Value: 300
+- ID: "c78d9b41-ffeb-402d-93e8-e1270d8bb787"
+  Hint: Type
+  Value: Spe.Client.Controls.ContentEditorRibbonPanel,Spe
 Languages:
 - Language: en
   Versions:
@@ -17,7 +17,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250308T045443Z
+      Value: 20250308T084353Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -28,11 +28,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a6c6d823-0a35-4b83-b3ea-edc6b469b5db"
+      Value: "9c86b4aa-e06a-4986-9294-536d86ef0de3"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T045443Z
+      Value: 20250308T084353Z
