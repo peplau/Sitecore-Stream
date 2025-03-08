@@ -1,18 +1,50 @@
 ﻿---
 ID: "4dcb2d61-ea21-49d0-9b1c-22109016d326"
-Parent: "be1e0ade-3425-437f-8ce9-fb6c7f58aa74"
+Parent: "8deeed76-cf5d-4a62-895e-bebb81ba0227"
 Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: /sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Functions/AssistantChat
+Path: /sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/Sitecore Flow/Assistant Chat
 SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: /~/icon/office/32x32/robot.png
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
     Import-Function -Name Functions -Module "Sitecore Flow"
     Import-Function -Name LoadSettings -Module "Sitecore Flow"
     
-    $context = "Brand Vision: To create the most compelling car company of the 21st century by driving the world’s transition to sustainable energy."
-    $chatTitle = "Chat Header Title"
-    $maxTokens = 1000
+    # Ask user to select an Assistant
+    $assistants = @{}
+    $assistantItems = Get-Assistants
+    
+    foreach ($assistantItem in $assistantItems) { 
+        $assistants[$assistantItem.Name] = $assistantItem.ID 
+    }
+    
+    $parameters = @(
+        @{ Name = "assistant"; Title="Assistant:"; Options=$assistants}
+    )
+    $props = @{
+        Title = "Chat with Assistant";
+        Description = "Select the Brand-Aware Assistant you want to use";
+        Icon = "OfficeWhite/32x32/robot.png";
+        Parameters = $parameters;
+        Width = 400; Height = 250;
+    }
+    $result = Read-Variable @props
+    if($result -ne "ok" -or ($result -eq "ok" -and $assistant -eq $null)) {
+        Close-Window
+        Exit
+    }
+    $assistantItem = Get-Item -Path master: -ID $assistant
+    
+    # Serialize the item
+    $serializedAssistant = Get-SerializedItem $assistantItem
+    
+    # Open Chat
+    $context = $serializedAssistant
+    $chatTitle = "Chat with Assistant"
+    $maxTokens = 10000
     
     $embed = '<script>' +
             'var apikey="'+$apiKey+'"; ' +
@@ -48,11 +80,11 @@ Languages:
         sitecore\etonon_dev
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "6bb7e6e1-d1f2-4869-8fa4-c6590186deb5"
+      Value: "a146ca88-74c4-4f85-b37a-70a6d8f38441"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\etonon_dev
+        sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T173306Z
+      Value: 20250308T194741Z

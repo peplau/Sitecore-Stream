@@ -1,21 +1,21 @@
 ﻿---
-ID: "b6876145-a48b-49fd-9473-1b9582b484be"
-Parent: "70a3d3ba-566b-4311-b361-201f9c74e27a"
+ID: "aef59d7a-5e97-4c99-a589-4068a98ee964"
+Parent: "81881544-e671-43f5-8712-b41ddaed3368"
 Template: "1db34c92-03b0-4475-9a39-da14e4d9d8fc"
-Path: /sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Process all changes
+Path: /sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Assistant Chat
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
-  Value: /~/icon/applications/32x32/gear_run.png
+  Value: /~/icon/office/32x32/robot.png
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 300
 - ID: "d47ed548-84d5-4622-9886-5cc164727507"
   Hint: Icon
-  Value: /~/icon/applications/32x32/gear_run.png
+  Value: /~/icon/office/32x32/robot.png
 - ID: "dbbf9ee3-c30e-4456-a81f-ed8c2e8df91b"
   Hint: Click
-  Value: "item:executescript(id=$ItemID,script={9701B6FD-A9A7-4B82-9E2B-6B1219A7A76F},scriptDb=master)"
+  Value: "item:executescript(id=$ItemID,script={4DCB2D61-EA21-49D0-9B1C-22109016D326},scriptDb=master)"
 Languages:
 - Language: en
   Versions:
@@ -23,10 +23,10 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250308T192031Z
+      Value: 20250308T194914Z
     - ID: "4df6da21-e745-444c-956e-1d4a96ab8821"
       Hint: Header
-      Value: Process all changes
+      Value: Assistant Chat
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -37,11 +37,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "8c6c4a69-d81c-4d8f-906c-f9898a52f32c"
+      Value: "4b743ff0-9f26-4524-8db9-3a2579ce4b2e"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T192031Z
+      Value: 20250308T194914Z
