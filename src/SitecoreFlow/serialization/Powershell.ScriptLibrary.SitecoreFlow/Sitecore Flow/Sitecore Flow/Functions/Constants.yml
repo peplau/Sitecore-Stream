@@ -17,12 +17,12 @@ SharedFields:
     # Assistant
     $SitecoreFlow_Document_TemplateID = "{D45957AD-3494-4859-AAF2-B1BAA0E8B89D}" 
     $SitecoreFlow_Document_Document_FieldName = "Document" 
+    $SitecoreFlow_Document_PlainText_FieldName = "Plain Text" 
+    $SitecoreFlow_Assistants_Path = "/sitecore/system/Modules/Sitecore Flow/Assistants" 
+    $SitecoreFlow_Assistant_Name_FieldName = "Name" 
     
     # Media
-    $SitecoreFlow_MediaFile_TemplateID = "{962B53C4-F93B-4DF9-9821-415C867B8903}"
-    
-    
-    
+    $SitecoreFlow_Pdf_TemplateID = "{0603F166-35B8-469F-8123-E8D87BEDC171}"
 Languages:
 - Language: en
   Versions:
@@ -41,11 +41,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a784fc01-0d0e-4682-ad69-79e0d4f342e2"
+      Value: "7cbb4c40-c0c0-4f2b-85ac-418d9f302af4"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T060841Z
+      Value: 20250308T180206Z

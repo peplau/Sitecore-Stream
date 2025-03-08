@@ -1,33 +1,23 @@
 ﻿---
-ID: "3d4821c0-780e-4c78-bb35-0aea415a92b0"
-Parent: "00f9952a-81e9-453f-b673-7bc6af8452ea"
-Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: /sitecore/templates/Foundation/Sitecore Flow/Assistants/_Document/Document/Document
+ID: "3210fd45-d4e7-40b9-95a2-b9bedef246ba"
+Parent: "89bbc252-0d2c-4de3-88be-c78eb61a0811"
+Template: "3619f992-4177-4124-89dd-dabfc2baf6bb"
+Path: /sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content
 SharedFields:
-- ID: "074f44ca-359a-4c13-b3aa-4a6be2a675b1"
-  Hint: Validation
-  Value: 
-- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
-  Hint: Source
-  Value: 
-- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
-  Hint: Type
-  Value: File
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 100
+  Value: 300
+- ID: "c78d9b41-ffeb-402d-93e8-e1270d8bb787"
+  Hint: Type
+  Value: Spe.Client.Controls.ContentEditorRibbonPanel,Spe
 Languages:
 - Language: en
-  Fields:
-  - ID: "b12e4906-b96b-495e-b343-cd2e92dc6347"
-    Hint: ValidationText
-    Value: 
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250308T045443Z
+      Value: 20250308T163603Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -38,11 +28,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "c42b8866-36fb-453f-9ea6-9e2e1b54d303"
+      Value: "27e80a82-85b9-43a1-b077-3ac14f412719"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T171703Z
+      Value: 20250308T163603Z

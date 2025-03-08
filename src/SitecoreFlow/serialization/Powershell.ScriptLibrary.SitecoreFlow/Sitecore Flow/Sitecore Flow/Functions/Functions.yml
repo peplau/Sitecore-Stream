@@ -14,6 +14,13 @@ SharedFields:
         return $settings;
     }
     
+    function Get-Assistants {
+        $assistantsRoot = Get-Item -Path "master:$($SitecoreFlow_Assistants_Path)"
+        $ret = $assistantsRoot.Children
+        $ret = @($ret)
+        return $ret;
+    }
+    
     function Get-FieldValue(){
         param( $item, $fieldName, $defaultValue = "" )
         $field = $item.Fields[$fieldName]
@@ -153,6 +160,76 @@ SharedFields:
             return $null
         }
     }
+    
+    function Get-SerializedItem() {
+        param(
+            $contextItem
+        )
+        $simplerObject = @{
+            ItemName = $contextItem.Name
+            Fields = @()
+        }
+        foreach($field in $contextItem.Fields){
+            $typedField = [Sitecore.Data.Fields.FieldTypeManager]::GetField($field)
+            if (($typedField -is [Sitecore.Data.Fields.TextField] -or $typedField -is [Sitecore.Data.Fields.HtmlField]) -and $field.Name.StartsWith("__") -ne $true){
+                $simplerObject.Fields += @{ $field.Name = $field.Value }
+            }
+        }
+        $serialized = $simplerObject | ConvertTo-Json
+        return $serialized
+    }
+    
+    function Convert-MarkdownToHtml(){
+        param( $markdownText )
+        [System.Reflection.Assembly]::LoadWithPartialName("MarkdownSharp") | Out-Null
+        $markdown = New-Object MarkdownSharp.Markdown
+        $html = $markdown.Transform($markdownText)
+        $html = $html -replace "<strong>", "<b>" -replace "</strong>", "</b>"
+        return $html
+    }
+    
+    function Check-TextCompliance($serializedItem, $serializedAssistant, $serializedDocs, $apiKey, $model) {
+        $headers = @{
+            "Authorization" = "Bearer $apiKey"
+            "Content-Type"  = "application/json"
+        }
+    
+        # Remove special characters from plainText
+        $cleanPlainText = $plainText -replace '[^\w\s.,-]', ''
+    
+        $prompt = @"
+        Giving this Brand Information:
+        ---
+        $serializedAssistant
+        ---
+        
+        Check if the following text complies with the brand guidelines above
+        ---
+        $serializedItem
+        ---
+    "@
+    
+        $body = @{
+            model = $model
+            messages = @(
+                @{
+                    role = "user"
+                    content = $prompt
+                }
+            )
+            temperature = 0
+        } | ConvertTo-Json -Depth 10 -Compress
+    
+        try {
+            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Headers $headers -Method Post -Body $body
+            $retString = $response.choices[0].message.content
+            return $retString
+        }
+        catch {
+            Write-Host "Error calling ChatGPT API: $_"
+            return $null
+        }
+    }
 Languages:
 - Language: en
   Versions:
@@ -171,11 +248,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "9c70d9ac-2977-4b9c-b015-e8059c12ae44"
+      Value: "39c475d5-9f99-4104-86b1-b5402cca932d"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T162838Z
+      Value: 20250308T190056Z

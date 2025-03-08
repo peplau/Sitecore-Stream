@@ -24,11 +24,8 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
-    Import-Function -Name Functions -Module "Sitecore Flow"
-    
     $assistantItem = $SitecoreContextItem
-    
-    ### Load Settings
+    Import-Function -Name Functions -Module "Sitecore Flow"
     Import-Function -Name LoadSettings -Module "Sitecore Flow"
     
     ### Loop on the uploaded documents
@@ -41,7 +38,7 @@ SharedFields:
         $documentPath = Get-FieldValue $docItem $SitecoreFlow_Document_Document_FieldName $null
         $mediaItem = Get-Item -Path "master:$documentPath"
     
-        if (Test-BaseTemplate -Item $mediaItem -Template $SitecoreFlow_MediaFile_TemplateID) {
+        if (Test-BaseTemplate -Item $mediaItem -Template $SitecoreFlow_Pdf_TemplateID) {
             # Clean the fields if this is the first one 
             if ($ind -eq 0){
                 Clear-ExtractedContentFromSitecore $assistantItem
@@ -102,11 +99,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "d4143543-f65e-41d1-bbf0-9f7c3f9a8b54"
+      Value: "4f50987d-48ba-485a-ab71-4ecb172ecb31"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T162848Z
+      Value: 20250308T170718Z
