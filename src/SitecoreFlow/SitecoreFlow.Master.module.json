@@ -3,34 +3,41 @@
   "description": "Serializes the master db items for the Sitecore Flow Module",
   "items": {
     "includes": [
-      {
-        "allowedPushOperations": "CreateAndUpdate",
-        "database": "master",
-        "name": "System.Modules.SitecoreFlow",
-        "path": "/sitecore/system/Modules/Sitecore Flow",
-        "scope": "ItemAndChildren"
-      },
-      {
-        "allowedPushOperations": "CreateAndUpdate",
-        "database": "master",
-        "name": "System.Modules.SitecoreFlow.Models",
-        "path": "/sitecore/system/Modules/Sitecore Flow/Models",
-        "scope": "DescendantsOnly"
-      },      
-      {
-        "allowedPushOperations": "CreateAndUpdate",
-        "database": "master",
-        "name": "Templates.Foundation.SitecoreFlow",
-        "path": "/sitecore/templates/Foundation/Sitecore Flow",
-        "scope": "itemAndDescendants"
-      },
-      {
-        "allowedPushOperations": "CreateAndUpdate",
-        "database": "master",
-        "name": "Templates.Feature.SitecoreFlow",
-        "path": "/sitecore/templates/Feature/Sitecore Flow",
-        "scope": "itemAndDescendants"
-      }
+        {
+            "allowedPushOperations": "CreateAndUpdate",
+            "database": "master",
+            "name": "System.Modules.SitecoreFlow",
+            "path": "/sitecore/system/Modules/Sitecore Flow",
+            "scope": "ItemAndChildren"
+        },
+        {
+            "allowedPushOperations": "CreateAndUpdate",
+            "database": "master",
+            "name": "System.Modules.SitecoreFlow.Models",
+            "path": "/sitecore/system/Modules/Sitecore Flow/Models",
+            "scope": "DescendantsOnly"
+        },
+        {
+            "allowedPushOperations": "CreateAndUpdate",
+            "database": "master",
+            "name": "Powershell.ScriptLibrary.SitecoreFlow",
+            "path": "/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow",
+            "scope": "itemAndDescendants"
+        },
+        {
+            "allowedPushOperations": "CreateAndUpdate",
+            "database": "master",
+            "name": "Templates.Foundation.SitecoreFlow",
+            "path": "/sitecore/templates/Foundation/Sitecore Flow",
+            "scope": "itemAndDescendants"
+        },
+        {
+            "allowedPushOperations": "CreateAndUpdate",
+            "database": "master",
+            "name": "Templates.Feature.SitecoreFlow",
+            "path": "/sitecore/templates/Feature/Sitecore Flow",
+            "scope": "itemAndDescendants"
+        }
     ],
     "excludedFields": [
       {
