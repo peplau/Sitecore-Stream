@@ -41,6 +41,10 @@ SharedFields:
     # Serialize the item
     $serializedAssistant = Get-SerializedItem $assistantItem
     
+    # Escape characters for safe embedding
+    $serializedAssistant = $serializedAssistant | ConvertTo-Json -Compress
+    $serializedAssistant = $serializedAssistant -replace '\\', '\\\\' -replace '"', '\"' -replace "`n", '\\n' -replace "`r", '\\r'
+    
     # Open Chat
     $context = $serializedAssistant
     $chatTitle = "Chat with Assistant"
@@ -80,11 +84,11 @@ Languages:
         sitecore\etonon_dev
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a146ca88-74c4-4f85-b37a-70a6d8f38441"
+      Value: "97dae9e9-94ef-490d-bcfa-cafd5d67b750"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\rpeplau
+        sitecore\etonon_dev
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T194741Z
+      Value: 20250308T203347Z
