@@ -9,17 +9,18 @@
 You can find a very good reference to Github flavoured markdown reference in [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). If you want something a bit more WYSIWYG for editing then could use [StackEdit](https://stackedit.io/app) which provides a more user friendly interface for generating the Markdown code. Those of you who are [VS Code fans](https://code.visualstudio.com/docs/languages/markdown#_markdown-preview) can edit/preview directly in that interface too.
 
 ## Team name
-⟹ Write the name of your Hackathon team here
+⟹ GoHorse Team
 
 ## Category
-⟹ Write the name of the selected category
+⟹ AI
 
 ## Description
-⟹ Write a clear description of your hackathon entry.  
+Here's an expanded, polished description for your Sitecore Brand AI module:
 
-  - Module Purpose
-  - What problem was solved (if any)
-    - How does this module solve it
+We created a powerful Sitecore Brand AI module that seamlessly integrates advanced artificial intelligence capabilities into your digital experience platform. This innovative solution empowers your marketing and content teams to effortlessly maintain brand consistency, ensures your brand guidelines are consistently applied, enhancing customer engagement and brand loyalty. With our Sitecore Brand AI module, you gain the tools needed to elevate your digital presence, simplify brand management, and drive impactful, data-driven outcomes at scale.
+
+FEATURES : Comparing your Sitecore item context against the Brand guideliness
+
 
 _You can alternately paste a [link here](#docs) to a document within this repo containing the description._
 
@@ -32,37 +33,22 @@ _You can alternately paste a [link here](#docs) to a document within this repo c
 
 ⟹ Does your module rely on other Sitecore modules or frameworks?
 
-- List any dependencies
-- Or other modules that must be installed
-- Or services that must be enabled/configured
-
-_Remove this subsection if your entry does not have any prerequisites other than Sitecore_
+- Sitecore Power shell
+- itextsharp.dll
 
 ## Installation instructions
-⟹ Write a short clear step-wise instruction on how to install your module.  
 
-> _A simple well-described installation process is required to win the Hackathon._  
-> Feel free to use any of the following tools/formats as part of the installation:
-> - Sitecore Package files
-> - Docker image builds
-> - Sitecore CLI
-> - msbuild
-> - npm / yarn
-> 
-> _Do not use_
-> - TDS
-> - Unicorn
- 
-for example:
 
 1. Use the Sitecore Installation wizard to install the [package](#link-to-package)
-2. ...
-3. profit
+
 
 ### Configuration
-⟹ If there are any custom configuration that has to be set manually then remember to add all details here.
-
-_Remove this subsection if your entry does not require any configuration that is not fully covered in the installation instructions already_
+1. Go to /sitecore/system/Modules/Sitecore Flow/Assistants
+2. Right click on the item "Assistants" and create a new item "Style Guide"
+3. Give a name of a brand "ex" My brand, can be your famous home beer company . or ex a good one like "Heineken"
+4. On this Sitecore field , Upload the Style guide.
+5. Click on the 'Heineken Item" and on the ribbon "Analyze", click -> 'Process all changes"
+6. Check all the fields being filled
 
 ## Usage instructions
 ⟹ Provide documentation about your module, how do the users use your module, where are things located, what do the icons mean, are there any secret shortcuts etc.
