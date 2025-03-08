@@ -1,0 +1,55 @@
+.chat-ai {
+    max-height: 500px;
+    overflow: hidden auto;
+    padding: 0 10px;
+  }
+ 
+  .chat-ai a {
+    text-decoration: none;
+  }
+
+  .chat-ai a::before {
+    color: #2d2d2d;
+    content: "\e015";
+    font-family: "Font Awesome Kit";
+    font-size: 18px;
+  }
+
+  .chat-ai a:hover::before {
+    content: "\e017";
+  }
+
+  .chat-ai label {
+    display: none;
+  }
+
+  .chat-ai .chat-input {
+    width: 100%;
+    height: 49px;
+    padding-left: 10px;
+  }
+
+  .chat-ai .user-message {
+    text-align: right;
+  }
+
+  .chat-ai .user-message p {
+    border: solid;
+    border-width: 2px;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #EEE;
+  }
+  
+  .chat-ai .row .model-label{
+    padding-top: 14px;
+  }
+  
+  .chat-ai .chat-button-container{
+    padding-left:0px;
+  }
+  
+  .chat-ai .chat-submit{
+    height: 50px;
+  }

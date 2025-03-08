@@ -1,0 +1,54 @@
+﻿---
+ID: "4dcb2d61-ea21-49d0-9b1c-22109016d326"
+Parent: "be1e0ade-3425-437f-8ce9-fb6c7f58aa74"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: /sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Functions/AssistantChat
+SharedFields:
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    Import-Function -Name Functions -Module "Sitecore Flow"
+    Import-Function -Name LoadSettings -Module "Sitecore Flow"
+    
+    $context = "Brand Vision: To create the most compelling car company of the 21st century by driving the world’s transition to sustainable energy."
+    
+    $embed = '<script>' +
+            'var apikey="'+$apiKey+'"; ' +
+            'var model="'+$model+'"; ' +
+            'var context="'+$context+'"; ' +
+        '</script>' +
+        '<iframe width="100%" height="600" ' +
+        'src="/sitecore%20modules/Sitecore%20Flow/SitecoreFlow.html" ' +
+        'frameborder="0" allowfullscreen></iframe>'
+     
+    Read-Variable `
+        -Parameters @{Name="embed"; Title=""; Editor="info" } `
+        -Width 800 -Height 600 `
+        -Title "Sitecore Flow" `
+        -Description " "
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250308T102721Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\etonon_dev
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\etonon_dev
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "13b7f123-7042-4f5a-a64a-e7ac0a42d756"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\etonon_dev
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250308T104734Z
