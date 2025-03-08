@@ -6,6 +6,20 @@
         {
             "allowedPushOperations": "CreateAndUpdate",
             "database": "master",
+            "name": "Templates.Foundation.SitecoreFlow",
+            "path": "/sitecore/templates/Foundation/Sitecore Flow",
+            "scope": "itemAndDescendants"
+        },
+        {
+            "allowedPushOperations": "CreateAndUpdate",
+            "database": "master",
+            "name": "Templates.Feature.SitecoreFlow",
+            "path": "/sitecore/templates/Feature/Sitecore Flow",
+            "scope": "itemAndDescendants"
+        },  
+        {
+            "allowedPushOperations": "CreateAndUpdate",
+            "database": "master",
             "name": "System.Modules.SitecoreFlow",
             "path": "/sitecore/system/Modules/Sitecore Flow",
             "scope": "ItemAndChildren"
@@ -22,20 +36,6 @@
             "database": "master",
             "name": "Powershell.ScriptLibrary.SitecoreFlow",
             "path": "/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow",
-            "scope": "itemAndDescendants"
-        },
-        {
-            "allowedPushOperations": "CreateAndUpdate",
-            "database": "master",
-            "name": "Templates.Foundation.SitecoreFlow",
-            "path": "/sitecore/templates/Foundation/Sitecore Flow",
-            "scope": "itemAndDescendants"
-        },
-        {
-            "allowedPushOperations": "CreateAndUpdate",
-            "database": "master",
-            "name": "Templates.Feature.SitecoreFlow",
-            "path": "/sitecore/templates/Feature/Sitecore Flow",
             "scope": "itemAndDescendants"
         }
     ],
