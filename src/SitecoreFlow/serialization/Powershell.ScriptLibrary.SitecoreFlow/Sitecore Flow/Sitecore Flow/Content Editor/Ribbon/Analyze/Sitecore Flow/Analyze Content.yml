@@ -88,6 +88,10 @@ SharedFields:
         list-style-type: decimal;
         padding-left: 30px;
     }
+    .results ul {
+        list-style-type: disc;
+        padding-left: 30px;
+    }
     .results p {
         margin-block-start: 12px;
         margin-block-end: 12px;
@@ -126,11 +130,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "8d0e9dcf-719f-4565-b20a-9f2ac40fcb8c"
+      Value: "0770523f-f248-41e8-8fa4-0f697782b6bf"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T191033Z
+      Value: 20250308T192452Z

@@ -209,9 +209,18 @@ SharedFields:
         ---
     "@
     
+    $system = @"
+        - Only mention the things that are not compliant
+        - At the top of the answer you must provide a ranking between 0 and 10, 0 = totally non-compliant and 10 = totally compliant
+        - Write the ranking using this format: "Compliance score: 5/10"
+    "@
         $body = @{
             model = $model
             messages = @(
+                @{
+                    role = "system"
+                    content = $system
+                }
                 @{
                     role = "user"
                     content = $prompt
@@ -248,11 +257,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "39c475d5-9f99-4104-86b1-b5402cca932d"
+      Value: "856602d3-68c4-4d9d-92ef-2f5a48dc2109"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T190056Z
+      Value: 20250308T192909Z
