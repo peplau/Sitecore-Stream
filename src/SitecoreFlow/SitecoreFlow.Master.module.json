@@ -16,7 +16,7 @@
             "name": "Templates.Feature.SitecoreFlow",
             "path": "/sitecore/templates/Feature/Sitecore Flow",
             "scope": "itemAndDescendants"
-        },  
+        },
         {
             "allowedPushOperations": "CreateAndUpdate",
             "database": "master",
@@ -37,7 +37,14 @@
             "name": "Powershell.ScriptLibrary.SitecoreFlow",
             "path": "/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow",
             "scope": "itemAndDescendants"
-        }
+        },
+        {
+            "allowedPushOperations": "CreateAndUpdate",
+            "database": "core",
+            "name": "Core.Ribbons.Strips",
+            "path": "/sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow",
+            "scope": "itemAndDescendants"
+        }       
     ],
     "excludedFields": [
       {
