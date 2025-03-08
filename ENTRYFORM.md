@@ -50,12 +50,13 @@ _You can alternately paste a [link here](#docs) to a document within this repo c
 5. Click on the 'Heineken Item" and on the ribbon "Analyze", click -> 'Process all changes"
 6. Check all the fields being filled
 
+![configuration](docs/images/configuration.gif?raw=true "configuration")
+
 ## Usage instructions
 ⟹ Provide documentation about your module, how do the users use your module, where are things located, what do the icons mean, are there any secret shortcuts etc.
 
 Include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
 
-![Hackathon Logo](docs/images/hackathon.png?raw=true "Hackathon Logo")
 
 You can embed images of different formats too:
 
