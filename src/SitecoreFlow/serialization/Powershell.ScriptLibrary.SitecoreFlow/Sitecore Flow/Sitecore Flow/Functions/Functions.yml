@@ -7,10 +7,10 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
-    Import-Function -Name Constants
+    Import-Function -Name Constants  -Module "Sitecore Flow"
     
     function Get-Settings {
-        $settings = Get-Item -Path master: -Query "$($SitecoreFlow_Settings_Path)//*[@@templateid='$($SitecoreFlow_Settings_TemplateID)']"
+        $settings = Get-Item -Path "master:$($SitecoreFlow_Settings_Path)"
         return $settings;
     }
     
@@ -91,11 +91,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "9ed009cb-e385-40f6-92b4-39d08fbafdbf"
+      Value: "2abab21a-bbb7-4e51-943b-5858e53bbf48"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T044054Z
+      Value: 20250308T052935Z

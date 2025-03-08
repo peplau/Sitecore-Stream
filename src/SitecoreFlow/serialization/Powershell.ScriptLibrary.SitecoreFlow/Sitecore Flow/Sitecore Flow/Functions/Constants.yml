@@ -7,11 +7,22 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+    # Settings
     $SitecoreFlow_Settings_TemplateID = "{007AA058-0215-4A4F-916C-2A163D26E678}" 
     $SitecoreFlow_Settings_Path = "/sitecore/system/Modules/Sitecore Flow/Settings" 
     $SitecoreFlow_ApiKey_FieldName = "API Key" 
     $SitecoreFlow_Model_FieldName = "Model" 
     $SitecoreFlow_ModelKey_FieldName = "Model Key"
+    
+    # Assistant
+    $SitecoreFlow_Document_TemplateID = "{D45957AD-3494-4859-AAF2-B1BAA0E8B89D}" 
+    $SitecoreFlow_Document_Document_FieldName = "Document" 
+    
+    # Media
+    $SitecoreFlow_MediaFile_TemplateID = "{962B53C4-F93B-4DF9-9821-415C867B8903}"
+    
+    
+    
 Languages:
 - Language: en
   Versions:
@@ -30,11 +41,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "627ba3e8-dd81-44bc-af52-1a2513d21875"
+      Value: "a784fc01-0d0e-4682-ad69-79e0d4f342e2"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T043833Z
+      Value: 20250308T060841Z

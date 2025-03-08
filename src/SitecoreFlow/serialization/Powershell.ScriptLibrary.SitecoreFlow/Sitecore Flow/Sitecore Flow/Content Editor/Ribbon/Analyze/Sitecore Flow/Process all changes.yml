@@ -1,0 +1,246 @@
+﻿---
+ID: "9701b6fd-a9a7-4b82-9e2b-6b1219a7a76f"
+Parent: "8deeed76-cf5d-4a62-895e-bebb81ba0227"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: /sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/Sitecore Flow/Process all changes
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: /~/icon/applications/32x32/gear_run.png
+- ID: "1c76313e-3c8c-4807-a826-135d10c39299"
+  Hint: ShowRule
+  Value: |
+    <ruleset>
+      <rule
+        uid="{E89B9F21-CFC5-4D2D-AD1E-2D646CC288C6}">
+        <conditions>
+          <condition
+            id="{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}"
+            uid="2F749E5EA8AD4B0286F8497B80C353E0"
+            templateid="{F5C68DC5-CD57-41CE-B241-98DF18BE8994}" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    Import-Function -Name Functions -Module "Sitecore Flow"
+    
+    $assistantItem = $SitecoreContextItem
+    
+    ### Load Settings
+    Import-Function -Name LoadSettings
+    
+    ### Loop on the uploaded documents
+    $documents = $assistantItem.Children | Where-Object { $_.TemplateID -eq $SitecoreFlow_Document_TemplateID }
+    $documents = @($documents)
+    
+    function Get-PlainTextFromGpt(){
+        param( 
+            $apiKey, $model, $mediaStream, $fileName
+        )
+    
+        $headers = @{
+            "Authorization" = "Bearer $($apiKey)"
+            "OpenAI-Beta" = "assistants=v2"
+        }
+    
+        # Convert Media Stream to Byte Array
+        $mediaStream.Seek(0, [System.IO.SeekOrigin]::Begin) 
+        $fileBytes = New-Object byte[] $mediaStream.Length
+        $mediaStream.Read($fileBytes, 0, $mediaStream.Length)
+        $mediaStream.Close()
+    
+        # Prepare the multipart form data for file upload
+        $boundary = [System.Guid]::NewGuid().ToString()
+        $LF = "`r`n"
+    
+        $bodyLines = (
+            "--$boundary",
+            "Content-Disposition: form-data; name=`"purpose`"",
+            "",
+            "assistants",
+            "--$boundary",
+            "Content-Disposition: form-data; name=`"file`"; filename=`"$fileName`"",
+            "Content-Type: application/octet-stream",
+            "",
+            [System.Text.Encoding]::GetEncoding("ISO-8859-1").GetString($fileBytes),
+            "--$boundary--"
+        ) -join $LF
+    
+        $headers["Content-Type"] = "multipart/form-data; boundary=$boundary"
+    
+        try {
+            ### Step 1: Upload the File to OpenAI ###
+            Write-Host "Uploading file to OpenAI..."
+            $uploadResponse = Invoke-RestMethod -Uri "https://api.openai.com/v1/files" -Method Post -Headers $headers -Body $bodyLines
+            $fileId = $uploadResponse.id
+    
+            if (-not $fileId) {
+                Write-Host "File upload failed."
+                return $null
+            }
+            Write-Host "File uploaded successfully with ID: $fileId"
+    
+            ### Step 2: Create an Assistant with File Search ###
+            Write-Host "Creating Assistant..."
+            $assistantData = @{
+                name = "Text Extractor"
+                instructions = "Extract the plain text version of uploaded files. If the file contains text, return it as-is without additional formatting."
+                model = $model
+                tools = @(@{ type = "file_search" })  
+            }
+            $assistantBody = $assistantData | ConvertTo-Json -Depth 10
+    
+            $assistantResponse = Invoke-RestMethod -Uri "https://api.openai.com/v1/assistants" -Method Post -Headers $headers -Body $assistantBody -ContentType "application/json"
+            $assistantId = $assistantResponse.id
+    
+            if (-not $assistantId) {
+                Write-Host "Failed to create Assistant."
+                return $null
+            }
+            Write-Host "Assistant created with ID: $assistantId"
+    
+            ### Step 3: Create a Vector Store ###
+            Write-Host "Creating Vector Store..."
+            $vectorStoreData = @{ name = "File Vector Store" }
+            $vectorStoreBody = $vectorStoreData | ConvertTo-Json -Depth 10
+    
+            $vectorStoreResponse = Invoke-RestMethod -Uri "https://api.openai.com/v1/vector_stores" -Method Post -Headers $headers -Body $vectorStoreBody -ContentType "application/json"
+            $vectorStoreId = $vectorStoreResponse.id
+    
+            if (-not $vectorStoreId) {
+                Write-Host "Failed to create Vector Store."
+                return $null
+            }
+            Write-Host "Vector Store created with ID: $vectorStoreId"
+    
+            ### Step 4: Add File to Vector Store ###
+            Write-Host "Adding File to Vector Store..."
+            $fileBatchData = @{
+                file_ids = @($fileId)
+            }
+            $fileBatchBody = $fileBatchData | ConvertTo-Json -Depth 10
+    
+            $fileBatchResponse = Invoke-RestMethod -Uri "https://api.openai.com/v1/vector_stores/$vectorStoreId/file_batches" -Method Post -Headers $headers -Body $fileBatchBody -ContentType "application/json"
+    
+            ### Step 5: Poll Until File Processing is Complete ###
+            Write-Host "Waiting for file to finish processing..."
+            $batchStatus = "in_progress"
+    
+            while ($batchStatus -eq "in_progress" -or $batchStatus -eq "queued") {
+                Start-Sleep -Seconds 5
+                $batchStatusResponse = Invoke-RestMethod -Uri "https://api.openai.com/v1/vector_stores/$vectorStoreId/file_batches/$($fileBatchResponse.id)" -Method Get -Headers $headers
+                $batchStatus = $batchStatusResponse.status
+                Write-Host "File Processing Status: $batchStatus"
+            }
+    
+            if ($batchStatus -ne "completed") {
+                Write-Host "File processing failed with status: $batchStatus"
+                return $null
+            }
+            Write-Host "File processing completed successfully."
+    
+            ### Step 6: Update Assistant to Use Vector Store ###
+            Write-Host "Updating Assistant to use Vector Store..."
+            $updateAssistantData = @{
+                tool_resources = @{ file_search = @{ vector_store_ids = @($vectorStoreId) } }
+            }
+            $updateAssistantBody = $updateAssistantData | ConvertTo-Json -Depth 10
+    
+            Invoke-RestMethod -Uri "https://api.openai.com/v1/assistants/$assistantId" -Method Post -Headers $headers -Body $updateAssistantBody -ContentType "application/json"
+    
+            ### Step 7: Create a Thread & Attach File ###
+            Write-Host "Creating Thread..."
+            $threadData = @{
+                messages = @(
+                    @{ 
+                        role = "user"
+                        content = "Please extract the plain text from the uploaded file."
+                        attachments = @(@{ file_id = "$fileId"; tools = @(@{ type = "file_search" }) })
+                    }
+                )
+            }
+            $threadBody = $threadData | ConvertTo-Json -Depth 10
+    
+            $threadResponse = Invoke-RestMethod -Uri "https://api.openai.com/v1/threads" -Method Post -Headers $headers -Body $threadBody -ContentType "application/json"
+            $threadId = $threadResponse.id
+    
+            ### Step 8: Run the Assistant ###
+            Write-Host "Starting Assistant Run..."
+            $runData = @{ assistant_id = $assistantId }
+            $runBody = $runData | ConvertTo-Json -Depth 10
+    
+            $runResponse = Invoke-RestMethod -Uri "https://api.openai.com/v1/threads/$threadId/runs" -Method Post -Headers $headers -Body $runBody -ContentType "application/json"
+            $runId = $runResponse.id
+    
+            ### Step 9: Retrieve the Extracted Text ###
+            Write-Host "Retrieving extracted text..."
+            $messagesResponse = Invoke-RestMethod -Uri "https://api.openai.com/v1/threads/$threadId/messages" -Method Get -Headers $headers
+            $plainText = $messagesResponse.data | Where-Object { $_.role -eq "assistant" } | Select-Object -ExpandProperty content
+    
+            return $plainText
+        }
+        catch {
+            Write-Host "Error: $_"
+            return $null
+        }    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    foreach ($docItem in $documents) {
+        
+        ### Get document to be processed
+        $documentPath = Get-FieldValue $docItem $SitecoreFlow_Document_Document_FieldName $null
+        $mediaItem = Get-Item -Path "master:$documentPath"
+        
+        if (Test-BaseTemplate -Item $mediaItem -Template $SitecoreFlow_MediaFile_TemplateID) {
+            # Get the media stream
+            $mediaItem = [Sitecore.Data.Items.MediaItem]$mediaItem
+            $media = [Sitecore.Resources.Media.MediaManager]::GetMedia($mediaItem)
+            $mediaStream = $media.GetStream().Stream
+            
+            $plainText = Get-PlainTextFromGpt $apiKey $model $mediaStream "$($mediaItem.Name).$($mediaItem.Extension)"
+        }    
+    
+        
+        ### Get Plain Text from document and save on the document item
+        
+        ### Get Information from document and save on the Assistant item    
+    }
+    
+    Close-Window
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250308T050341Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rpeplau
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rpeplau
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "02fe509a-e2e1-4e06-821d-50b17838778a"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\rpeplau
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250308T072943Z
