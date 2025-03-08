@@ -1,27 +1,35 @@
-# Hackathon Submission Entry form
-
-You can find a very good reference to Github flavoured markdown reference in [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). If you want something a bit more WYSIWYG for editing then could use [StackEdit](https://stackedit.io/app) which provides a more user friendly interface for generating the Markdown code. Those of you who are [VS Code fans](https://code.visualstudio.com/docs/languages/markdown#_markdown-preview) can edit/preview directly in that interface too.
+# Sitecore Flow
 
 ## Team name
-⟹ GoHorse Team
+⟹ **Go Horse**
+  - Eduardon Tonon
+  - José Neto
+  - Rodrigo Peplau
+
+  ![Go Horse](docs/images/Gohorse-300x300.png)
 
 ## Category
 ⟹ AI
 
 ## Description
-Here's an expanded, polished description for your Sitecore Brand AI module:
+- Module Purpose: 
+Here's a simplified and clear version for the module purpose field:
 
-We created a powerful Sitecore Brand AI module that seamlessly integrates advanced artificial intelligence capabilities into your digital experience platform. This innovative solution empowers your marketing and content teams to effortlessly maintain brand consistency, ensures your brand guidelines are consistently applied, enhancing customer engagement and brand loyalty. With our Sitecore Brand AI module, you gain the tools needed to elevate your digital presence, simplify brand management, and drive impactful, data-driven outcomes at scale.
+**Module Purpose:**  
+This module integrates advanced AI into your Sitecore platform, helping your marketing and content teams easily maintain brand consistency. It ensures brand guidelines are applied automatically, improving customer engagement, simplifying brand management, and delivering effective, data-driven results.
 
-FEATURES : Comparing your Sitecore item context against the Brand guideliness
+- How it works:
+ It enables the content editor to  compare the Sitecore Items against the Brand guideliness, giving a score and recommendations
 
-
-_You can alternately paste a [link here](#docs) to a document within this repo containing the description._
 
 ## Video link
 ⟹ Provide a video highlighing your Hackathon module submission and provide a link to the video. You can use any video hosting, file share or even upload the video to this repository. _Just remember to update the link below_
 
 ⟹ [Replace this Video link](#video-link)
+
+## Compatibility
+- Sitecore XP
+- Sitecore XM 
 
 ## Pre-requisites and Dependencies
 
@@ -52,13 +60,5 @@ _You can alternately paste a [link here](#docs) to a document within this repo c
 Include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
 
 
-You can embed images of different formats too:
-
-![Deal With It](docs/images/deal-with-it.gif?raw=true "Deal With It")
-
-And you can embed external images too:
-
-![Random](https://thiscatdoesnotexist.com/)
-
 ## Comments
-If you'd like to make additional comments that is important for your module entry.
+This module significantly streamlines brand management by integrating AI directly into the content editing workflow. It provides immediate feedback by comparing content against brand guidelines, ensuring consistent branding across all channels. Future enhancements could include expanding AI recommendations for content optimization or integrating additional file formats for style guides.
