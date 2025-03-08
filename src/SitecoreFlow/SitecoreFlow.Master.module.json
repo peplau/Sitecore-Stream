@@ -8,8 +8,15 @@
         "database": "master",
         "name": "System.Modules.SitecoreFlow",
         "path": "/sitecore/system/Modules/Sitecore Flow",
-        "scope": "itemAndDescendants"
+        "scope": "ItemAndChildren"
       },
+      {
+        "allowedPushOperations": "CreateAndUpdate",
+        "database": "master",
+        "name": "System.Modules.SitecoreFlow.Models",
+        "path": "/sitecore/system/Modules/Sitecore Flow/Models",
+        "scope": "DescendantsOnly"
+      },      
       {
         "allowedPushOperations": "CreateAndUpdate",
         "database": "master",
@@ -23,6 +30,12 @@
         "name": "Templates.Feature.SitecoreFlow",
         "path": "/sitecore/templates/Feature/Sitecore Flow",
         "scope": "itemAndDescendants"
+      }
+    ],
+    "excludedFields": [
+      {
+        "fieldID": "{2E8766CE-35F4-4674-9C35-DC1CEA8A66CD}",
+        "description": "API Key"
       }
     ]
   }

@@ -3,6 +3,10 @@ ID: "b3391e6e-05ca-49ee-8663-3300e2828a40"
 Parent: "b26bd035-8d0a-4df3-8f67-2de3c7fdd74a"
 Template: "0437fee2-44c9-46a6-abe9-28858d9fee8c"
 Path: /sitecore/templates/Foundation/Sitecore Flow
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: /~/icon/office/32x32/robot.png
 Languages:
 - Language: en
   Versions:
@@ -21,11 +25,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "587f252b-6c9d-4a43-96c6-3ff01d79fa73"
+      Value: "5998ed17-a991-45dd-a6bd-ac2bbb3b6242"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T011708Z
+      Value: 20250308T033822Z

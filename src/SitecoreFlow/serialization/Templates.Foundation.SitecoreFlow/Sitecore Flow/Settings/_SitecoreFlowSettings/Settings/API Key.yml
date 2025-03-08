@@ -1,12 +1,15 @@
 ﻿---
-ID: "5b46b2a3-bf14-43f0-a53c-9474f075b836"
-Parent: "08477468-d438-43d4-9d6a-6d84a611971c"
-Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
-Path: /sitecore/system/Modules/Sitecore Flow
+ID: "2e8766ce-35f4-4674-9c35-dc1cea8a66cd"
+Parent: "2669e970-ff53-45ac-ab35-8cb27591ac5e"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Foundation/Sitecore Flow/Settings/_SitecoreFlowSettings/Settings/API Key
 SharedFields:
-- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
-  Hint: __Icon
-  Value: /~/icon/office/32x32/robot.png
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
 Languages:
 - Language: en
   Versions:
@@ -14,22 +17,22 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250308T011601Z
+      Value: 20250308T035041Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
-        sitecore\Admin
+        sitecore\rpeplau
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
-        sitecore\Admin
+        sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "366f798e-16f6-45bf-98a8-f21d095b3902"
+      Value: "2589289d-1c0c-4142-9714-6682f8b06166"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T033839Z
+      Value: 20250308T035134Z

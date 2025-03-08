@@ -1,0 +1,30 @@
+﻿---
+ID: "34a12e53-f93c-4222-9dfe-7e2959de5099"
+Parent: "60f8fbc8-0eeb-4bd5-845c-c63483031d1e"
+Template: "c424dd33-a29b-4add-b46b-79c3defd9820"
+Path: "/sitecore/system/Modules/Sitecore Flow/Models/gpt-4o"
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250308T034733Z
+    - ID: "448fc4dc-4cfb-4fa0-a28f-3297e7415cf1"
+      Hint: Model Key
+      Value: "gpt-4o"
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "8c9efde3-2e4c-43cd-80f4-cc15bc7283a9"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\rpeplau
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250308T034846Z
