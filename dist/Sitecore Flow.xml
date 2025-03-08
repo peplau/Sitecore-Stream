@@ -1,0 +1,204 @@
+<project>
+  <Metadata>
+    <metadata>
+      <PackageName>Sitecore Flow</PackageName>
+      <Author>Go Horse Team</Author>
+      <Version>1.0</Version>
+      <Revision />
+      <License />
+      <Comment />
+      <Attributes />
+      <Readme />
+      <Publisher />
+      <PostStep />
+      <PackageID />
+    </metadata>
+  </Metadata>
+  <SaveProject>True</SaveProject>
+  <Sources>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/{B3391E6E-05CA-49EE-8663-3300E2828A40}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/{9C34B014-9877-415C-852E-1EB1246C1881}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Assistant/{0E755619-730B-47F0-9B07-5F12049474B5}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Assistant/Name/{CCA6B9D2-F0D9-4FC1-BA7B-AC97CA30F485}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Brand Context/{0F5021D3-7E3C-4AA7-A8C7-30F88CA407F7}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Brand Context/Brand Beliefs and Benefits/{4EA9A57A-4356-4DC4-9CB8-00242890257A}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Brand Context/Brand benefits/{0ABF5586-E332-4A04-A671-375884D5B5FA}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Brand Context/Brand Context/{9BF2C909-FFC1-4021-8053-A7B9A56081E3}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Brand Context/Brand history/{A04A6E1D-A992-4A68-90E0-2F99E777DFFB}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Brand Context/Brand purpose/{39E66E03-4301-48C4-ADD5-DA1BE6182D95}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Image Style/{914B2487-920C-4750-AD81-5E7D8A5D1C79}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Image Style/Image Style/{4E35CDC3-2CC0-43C7-9411-AE8F21A23CA9}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Tone of Voice/{AB493A26-0659-410A-AE27-D9FE89AC8D28}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Tone of Voice/Tone of Voice/{C5CB1266-750C-4B16-A94C-5FDDFFFB2EC5}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Visual Guidelines/{87FECA28-793C-4C44-9166-7D9F9FD1E6E8}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Assistant/Visual Guidelines/Visual guidance/{23A89D30-1CE4-4D48-A785-05137071CFAA}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Document/{899034A8-073F-4175-9A60-21BA3F59AE7B}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Document/Document/{00F9952A-81E9-453F-B673-7BC6AF8452EA}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Document/Document/Document/{3D4821C0-780E-4C78-BB35-0AEA415A92B0}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/_Document/Document/Plain Text/{2D796499-2CEE-432D-AAE0-4CF9320B4A3F}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Assistants/{46E5799F-C6A3-4BE1-81ED-73D252D2FC5C}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Data/_OpenAIModel/{4227648B-7A7B-4DC2-A7C4-5717374F44A4}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Data/_OpenAIModel/Model Data/{8DDE14DA-7B00-41E6-BDFB-A44B5CB5D0FD}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Data/_OpenAIModel/Model Data/Model Key/{448FC4DC-4CFB-4FA0-A28F-3297E7415CF1}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Data/{477DED7F-B676-4EF3-B2C0-CEE6754CF4AC}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Settings/_SitecoreFlowSettings/{D22AD303-17A9-40A8-A6DF-460E4F5CAE6C}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Settings/_SitecoreFlowSettings/Settings/{2669E970-FF53-45AC-AB35-8CB27591AC5E}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Settings/_SitecoreFlowSettings/Settings/API Key/{2E8766CE-35F4-4674-9C35-DC1CEA8A66CD}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Settings/_SitecoreFlowSettings/Settings/Model/{71D8F6D0-FF83-4985-B023-B0520C88C860}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Foundation/Sitecore Flow/Settings/{2F5003AA-206A-4914-B319-C48AA6AB2AF7}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Templates.Foundation.SitecoreFlow</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/{E162A081-8A8A-41D2-8D33-84FC5836D069}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Assistants/{6A7765C9-E4A8-442E-A94F-1AED5BB55906}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Assistants/Assistant/__Standard Values/{2F73C669-74C7-4A00-93F5-A053B0386C0A}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Assistants/Assistant/{F5C68DC5-CD57-41CE-B241-98DF18BE8994}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Assistants/Document/__Standard Values/{F3DB4400-1EAB-4715-8804-6202CA0EC54E}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Assistants/Document/{D45957AD-3494-4859-AAF2-B1BAA0E8B89D}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Data/{EC1C3D69-E2A3-4118-A120-E9F31DB750AC}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Data/OpenAI Model/__Standard Values/{BEFB2D38-7DF4-4886-B4C5-FA63C7E844B3}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Data/OpenAI Model/{C424DD33-A29B-4ADD-B46B-79C3DEFD9820}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Settings/{F68F3F1F-414F-44D6-AE4D-44A908EDC17B}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Settings/Sitecore Flow Settings/__Standard Values/{5DB9DD0D-4464-4477-95E4-DCAA4B7F656F}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Feature/Sitecore Flow/Settings/Sitecore Flow Settings/{007AA058-0215-4A4F-916C-2A163D26E678}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Templates.Feature.SitecoreFlow</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/{5B46B2A3-BF14-43F0-A53C-9474F075B836}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Assistants/{F0E4C11F-5667-4CC6-9C92-A677F17312D1}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Settings/{5AABD3AF-E072-4E16-8782-1934B0B56EF4}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>System.Modules.SitecoreFlow</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Models/{60F8FBC8-0EEB-4BD5-845C-C63483031D1E}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Models/gpt-35-turbo/{E220103F-B0D6-49F0-B69A-AA812F3F5232}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Models/gpt-4/{81B142CB-4DC4-41A7-BD5A-E2B629239376}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Models/gpt-4o/{34A12E53-F93C-4222-9DFE-7E2959DE5099}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Models/gpt-4-turbo/{7D09A15F-6E5B-46B0-BD32-655C2E6B0174}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>System.Modules.SitecoreFlow.Models</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/{3667D66F-FD60-4102-96FB-08DBE7C2C6F3}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/{93F072AD-B2E5-43D6-8C2F-8079A8759C03}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/{7C4ABD02-2325-422E-87A8-5001BF6AB5F2}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/{723BB1FC-7D27-4A0E-9F69-C7CF395BBAA2}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/{A2C25492-8445-48CF-BB37-B24D67A092E5}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/Sitecore Flow/{8DEEED76-CF5D-4A62-895E-BEBB81BA0227}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/Sitecore Flow/Analyze Content/{32C94E0B-2E84-40B5-9DB6-C8CE714826D4}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/Sitecore Flow/Assistant Chat/{4DCB2D61-EA21-49D0-9B1C-22109016D326}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/Sitecore Flow/Populate Assistantant/{9701B6FD-A9A7-4B82-9E2B-6B1219A7A76F}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Functions/{BE1E0ADE-3425-437F-8CE9-FB6C7F58AA74}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Functions/Constants/{3CB4E357-65C3-4746-AFC8-AD748142D14D}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Functions/Functions/{E0D8C216-6BC3-4770-9465-A9EF0BF164FB}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Functions/LoadSettings/{6FDD2EF0-3107-4141-B858-57441C897C8B}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Powershell.ScriptLibrary.SitecoreFlow</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/core/sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/{55035D4D-59B9-4638-9346-B8B94604CEAC}/invariant/0</x-item>
+        <x-item>/core/sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/{8AC6F954-C894-43F3-AC06-84D61991DA0E}/invariant/0</x-item>
+        <x-item>/core/sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Analyze Content/{875AB855-FA60-46F9-AEF2-BBB032873D8B}/invariant/0</x-item>
+        <x-item>/core/sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Assistant Chat/{ED871BB1-30A4-406A-A489-5EE4CAB07735}/invariant/0</x-item>
+        <x-item>/core/sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Populate Assistantant/{FA066117-490B-4F08-9DC9-1B11462A443C}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Core.Ribbons.Strips</Name>
+    </xitems>
+    <xfiles>
+      <Entries>
+        <x-item>/bin/itextsharp.dll</x-item>
+      </Entries>
+      <Converter>
+        <FileToEntryConverter>
+          <Root>/</Root>
+          <Transforms />
+        </FileToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>dll</Name>
+    </xfiles>
+    <xfiles>
+      <Entries>
+        <x-item>/sitecore modules/Sitecore Flow/sitecore-flow-chatgpt.css</x-item>
+        <x-item>/sitecore modules/Sitecore Flow/sitecore-flow-chatgpt.js</x-item>
+        <x-item>/sitecore modules/Sitecore Flow/SitecoreFlow.html</x-item>
+      </Entries>
+      <Converter>
+        <FileToEntryConverter>
+          <Root>/</Root>
+          <Transforms />
+        </FileToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>sitecore_modules</Name>
+    </xfiles>
+  </Sources>
+  <Converter>
+    <TrivialConverter>
+      <Transforms />
+    </TrivialConverter>
+  </Converter>
+  <Include />
+  <Exclude />
+  <Name />
+</project>
