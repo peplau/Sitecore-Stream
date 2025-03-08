@@ -1,21 +1,21 @@
 ﻿---
-ID: "847f6d22-2ccb-4584-9e7b-6ce4b57819cf"
+ID: "79aff43e-d535-44b0-a717-01ed6b4b398a"
 Parent: "81881544-e671-43f5-8712-b41ddaed3368"
 Template: "1db34c92-03b0-4475-9a39-da14e4d9d8fc"
-Path: /sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Analyze Content
+Path: /sitecore/content/Applications/Content Editor/Ribbons/Strips/Analyze/Sitecore Flow/Analyze Content/Process Assistantant changes
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
-  Value: /~/icon/office/32x32/fingerprint_scan.png
+  Value: /~/icon/applications/32x32/gear_run.png
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 300
 - ID: "d47ed548-84d5-4622-9886-5cc164727507"
   Hint: Icon
-  Value: /~/icon/office/32x32/fingerprint_scan.png
+  Value: /~/icon/applications/32x32/gear_run.png
 - ID: "dbbf9ee3-c30e-4456-a81f-ed8c2e8df91b"
   Hint: Click
-  Value: "item:executescript(id=$ItemID,script={32C94E0B-2E84-40B5-9DB6-C8CE714826D4},scriptDb=master)"
+  Value: "item:executescript(id=$ItemID,script={9701B6FD-A9A7-4B82-9E2B-6B1219A7A76F},scriptDb=master)"
 Languages:
 - Language: en
   Versions:
@@ -26,7 +26,7 @@ Languages:
       Value: 20250308T194914Z
     - ID: "4df6da21-e745-444c-956e-1d4a96ab8821"
       Hint: Header
-      Value: Analyze Content
+      Value: Process Assistantant changes
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -37,7 +37,7 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "50bf6759-58bd-48c3-b1ab-20f6a987de66"
+      Value: "f5b0d67f-1d94-4d63-9c54-d1121743a718"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
