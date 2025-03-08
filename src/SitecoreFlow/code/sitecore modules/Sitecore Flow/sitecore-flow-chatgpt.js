@@ -1,20 +1,21 @@
 var model = window.parent.model;
 var apiKey = window.parent.apikey;
 var context = window.parent.context;
+var chatTitle = window.parent.chatTitle;
+var maxTokens = window.parent.maxTokens;
 
-async function ChatAICompletion(userMessage, $systemMessageOutput) {
-  // Compile the message content
-  var messageContent = [];
+var historyMessages = [];
 
+async function ChatAICompletion(message, $systemMessageOutput) {
   // Build messages array
   var submitBody = {
     model: model,
-    messages: [],
+    messages: [...historyMessages],
     stream: true
   };
-  
-  submitBody.messages[submitBody.messages.length] =  { role: "system", content: { type: "text", text: context } };
-  submitBody.messages[submitBody.messages.length] = { role: "user", content: { type: "text", text: userMessage } };
+
+  let userMessage = { role: "user", content: message };
+  submitBody.messages[submitBody.messages.length] = userMessage;
 
   // Send to OpenAI API for analysis
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -31,10 +32,13 @@ async function ChatAICompletion(userMessage, $systemMessageOutput) {
     return;
   }
   
+  // if success then include on history;
+  historyMessages[historyMessages.length] = userMessage;
+  
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
   
-  let message = "";
+  let systemMessage = "";
   
   while (true) {
     const { value, done } = await reader.read();
@@ -49,16 +53,18 @@ async function ChatAICompletion(userMessage, $systemMessageOutput) {
       if (line.startsWith("data: ")) {
         const json = line.replace("data: ", "").trim();
 
-        if (json === "[DONE]") {
-          
+        if (json === "[DONE]") {          
           console.log("Streaming complete.");
+          
+          historyMessages[historyMessages.length] = { role: "assistant", content: systemMessage };
+          scrollToSubmit();
           return;
         }
 
         try {
           const parsed = JSON.parse(json);
-          message += parsed.choices[0]?.delta?.content || "";
-          writeChatMessage($systemMessage, message); // Print token by token
+          systemMessage += parsed.choices[0]?.delta?.content || "";
+          writeChatMessage($systemMessage, systemMessage); // Print token by token
         } catch (error) {
           console.error("Error parsing JSON:", error);
         }
@@ -72,17 +78,29 @@ var converter = new showdown.Converter();
 function writeChatMessage($systemMessage, messageText)
 {
   $systemMessage.html(converter.makeHtml(messageText));
-  //scrollToSubmit(); Need fix it to avoid it run for each token
+  if (messageText.length % 15 == 0)
+    scrollToSubmit();
 }
 
-function applyInitStyles()
+function applyLayoutChanges()
 {
+  var chatTitleEl = document.getElementsByClassName("chat-title")[0];
+  chatTitleEl.innerText = chatTitle;
+  
   var body = document.getElementsByTagName("body")[0];
   body.style.backgroundColor = "white";
 }
 
+function init()
+{
+  applyLayoutChanges()
+  
+  historyMessages = [];
+  historyMessages[historyMessages.length] = { role: "system", content: context };
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-  applyInitStyles();
+  init();
   
   var chatMessages = null;
   $('.chat-ai .chat-input').focus();
