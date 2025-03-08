@@ -12,11 +12,8 @@
 ⟹ AI
 
 ## Description
-- Module Purpose: 
-Here's a simplified and clear version for the module purpose field:
-
 **Module Purpose:**  
-This module integrates advanced AI into your Sitecore platform, helping your marketing and content teams easily maintain brand consistency. It ensures brand guidelines are applied automatically, improving customer engagement, simplifying brand management, and delivering effective, data-driven results.
+This module integrates advanced AI into your Sitecore platform, helping your marketing and content teams easily maintain brand consistency. It ensures brand guidelines are respected, improving customer engagement, simplifying brand management, and delivering effective, data-driven results.
 
 - How it works:
  It enables the content editor to  compare the Sitecore Items against the Brand guideliness, giving a score and recommendations
