@@ -20,7 +20,7 @@
       {
         "allowedPushOperations": "CreateAndUpdate",
         "database": "master",
-        "name": "Sitecore.templates.Feature.SitecoreFlow",
+        "name": "Templates.Feature.SitecoreFlow",
         "path": "/sitecore/templates/Feature/Sitecore Flow",
         "scope": "itemAndDescendants"
       }
