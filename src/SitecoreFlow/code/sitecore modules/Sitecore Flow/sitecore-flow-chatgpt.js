@@ -78,7 +78,7 @@ var converter = new showdown.Converter();
 function writeChatMessage($systemMessage, messageText)
 {
   $systemMessage.html(converter.makeHtml(messageText));
-  if (messageText.length % 15 == 0)
+  if (messageText.length % 10 == 0)
     scrollToSubmit();
 }
 
