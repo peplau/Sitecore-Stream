@@ -110,7 +110,12 @@ SharedFields:
         )
     
         try {
-          	Add-Type -Path "C:\inetpub\wwwroot\sc10hacsc.dev.local\bin\itextsharp.dll"
+    
+            # Dynamically resolve itextsharp.dll path
+            $kernel = [Sitecore.Configuration.Settings]::GetSetting("LicenseFile")
+            $sitecoreWebRoot = [System.IO.Path]::GetDirectoryName($kernel)
+            $dllPath = Join-Path $sitecoreWebRoot "bin\itextsharp.dll"
+    
     
             # Copy the PDF stream to a temporary file to avoid memory stream issues
             $tempFilePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), $fileName)
@@ -224,11 +229,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "cf0f0543-2cad-4bad-ad95-6813c2511b23"
+      Value: "93ba6b11-49c3-4d2e-a758-d5324cd608d9"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\jneto
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T121855Z
+      Value: 20250308T123149Z
