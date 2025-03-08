@@ -30,6 +30,16 @@ SharedFields:
         return $field.Value
     }
     
+    function CleanString($rawString) {
+        $cleanPlainText = $rawString -replace '(\\*)"', '$1$1\"'
+        $cleanPlainText = $cleanPlainText -replace '[^\w\s.,-]', ''
+        $maxLength = 40000
+        if ($cleanPlainText.Length -gt $maxLength){
+            $cleanPlainText = $cleanPlainText.Substring(0, $maxLength)
+        }
+        return $cleanPlainText
+    }
+    
     function Invoke-ChatGptExtraction($plainText, $apiKey, $model) {
         $headers = @{
             "Authorization" = "Bearer $apiKey"
@@ -37,7 +47,7 @@ SharedFields:
         }
     
         # Remove special characters from plainText
-        $cleanPlainText = $plainText -replace '[^\w\s.,-]', ''
+        $cleanPlainText = CleanString $plainText
     
         $prompt = @"
         Extract the following information about the brand from the text below as JSON: {
@@ -53,7 +63,6 @@ SharedFields:
         Text:
         $cleanPlainText
     "@
-    
         $body = @{
             model = $model
             messages = @(
@@ -63,7 +72,7 @@ SharedFields:
                 }
             )
             temperature = 0
-        } | ConvertTo-Json -Depth 4 -Compress
+        } | ConvertTo-Json -Depth 100 -Compress
     
         try {
             $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Headers $headers -Method Post -Body $body
@@ -74,6 +83,7 @@ SharedFields:
         }
         catch {
             Write-Host "Error calling ChatGPT API: $_"
+            [Sitecore.Diagnostics.Log]::Error("ERROR: $($body)", "PowerShellScript")        
             return $null
         }
     }
@@ -195,7 +205,7 @@ SharedFields:
         }
     
         # Remove special characters from plainText
-        $cleanPlainText = $plainText -replace '[^\w\s.,-]', ''
+        $cleanPlainText = CleanString $plainText
     
         $prompt = @"
         Giving this Brand Information:
@@ -257,11 +267,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "856602d3-68c4-4d9d-92ef-2f5a48dc2109"
+      Value: "e1df5972-f86d-49d2-97e6-76cdb241c796"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T192909Z
+      Value: 20250308T222223Z

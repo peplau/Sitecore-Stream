@@ -2,7 +2,7 @@
 ID: "9701b6fd-a9a7-4b82-9e2b-6b1219a7a76f"
 Parent: "8deeed76-cf5d-4a62-895e-bebb81ba0227"
 Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: /sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/Sitecore Flow/Process Assistantant changes
+Path: /sitecore/system/Modules/PowerShell/Script Library/Sitecore Flow/Sitecore Flow/Content Editor/Ribbon/Analyze/Sitecore Flow/Populate Assistantant
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
