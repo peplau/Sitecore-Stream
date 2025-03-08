@@ -1,0 +1,31 @@
+﻿---
+ID: "f3db4400-1eab-4715-8804-6202ca0ec54e"
+Parent: "d45957ad-3494-4859-aaf2-b1baa0e8b89d"
+Template: "d45957ad-3494-4859-aaf2-b1baa0e8b89d"
+Path: /sitecore/templates/Feature/Sitecore Flow/Assistants/Document/__Standard Values
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250308T045624Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rpeplau
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rpeplau
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "030db23e-409e-4da6-a2d5-7a855c7f9b93"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\rpeplau
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250308T045624Z

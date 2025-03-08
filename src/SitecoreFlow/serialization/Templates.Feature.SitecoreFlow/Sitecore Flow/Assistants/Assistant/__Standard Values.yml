@@ -1,0 +1,38 @@
+﻿---
+ID: "2f73c669-74c7-4a00-93f5-a053b0386c0a"
+Parent: "f5c68dc5-cd57-41ce-b241-98df18be8994"
+Template: "f5c68dc5-cd57-41ce-b241-98df18be8994"
+Path: /sitecore/templates/Feature/Sitecore Flow/Assistants/Assistant/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{D45957AD-3494-4859-AAF2-B1BAA0E8B89D}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250308T045200Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rpeplau
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rpeplau
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "b9de43da-69e6-47bb-b947-b34b5096c4ac"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\rpeplau
+    - ID: "cca6b9d2-f0d9-4fc1-ba7b-ac97ca30f485"
+      Hint: Name
+      Value: $name
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250308T045810Z
