@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Required to allow call api.openai.com -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.openai.com; script-src 'self' https://code.jquery.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net;">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/sitecore%20modules/Sitecore%20Flow/sitecore-flow-chatgpt.css">
+</head>
+<body width="100%" height="100%">
+  <div class="chat-ai">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12">
+          <span class="chat-ai-messages">Chat AI Messages</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 col-sm-11">
+          <input id="Message" name="Message" class="chat-input" type="text" value="" maxlength="255" placeholder="Message">
+        </div>
+        <div class="col-4 col-sm-1 chat-button-container">
+          <input value="Send" type="submit" class="chat-submit">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.3/showdown.min.js"></script>
+<script src="/sitecore%20modules/Sitecore%20Flow/sitecore-flow-chatgpt.js"></script>
