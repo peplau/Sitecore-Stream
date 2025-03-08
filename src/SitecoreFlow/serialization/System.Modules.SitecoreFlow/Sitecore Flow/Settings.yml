@@ -13,14 +13,14 @@ Languages:
       Value: 20250308T035402Z
     - ID: "71d8f6d0-ff83-4985-b023-b0520c88c860"
       Hint: Model
-      Value: "{34A12E53-F93C-4222-9DFE-7E2959DE5099}"
+      Value: "{E220103F-B0D6-49F0-B69A-AA812F3F5232}"
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "efc97621-cbc3-4f4f-9c25-9389566d104c"
+      Value: "1a324db2-6063-41b2-aaed-003ffdccd91e"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\rpeplau
+        sitecore\jneto
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T193600Z
+      Value: 20250308T125551Z
