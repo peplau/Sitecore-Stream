@@ -14,6 +14,153 @@ SharedFields:
         return $settings;
     }
     
+    function Get-Assistants {
+        $assistantsRoot = Get-Item -Path "master:$($SitecoreFlow_Assistants_Path)"
+        $ret = $assistantsRoot.Children
+        $ret = @($ret)
+        return $ret;
+    }
+    
+    function Get-FieldValue(){
+        param( $item, $fieldName, $defaultValue = "" )
+        $field = $item.Fields[$fieldName]
+        if ($field -eq $null){
+            return $defaultValue
+        }
+        return $field.Value
+    }
+    
+    function Invoke-ChatGptExtraction($plainText, $apiKey, $model) {
+        $headers = @{
+            "Authorization" = "Bearer $apiKey"
+            "Content-Type"  = "application/json"
+        }
+    
+        # Remove special characters from plainText
+        $cleanPlainText = $plainText -replace '[^\w\s.,-]', ''
+    
+        $prompt = @"
+        Extract the following information about the brand from the text below as JSON: {
+            "Brand Purpose": "", 
+            "Brand History": "",
+            "Brand Benefits": "",
+            "Brand Context": "",
+            "Brand Beliefs and Benefits": "",
+            "Tone of Voice": "",        // Brand Tone of Voice (not the document)
+            "Visual guidance": "",
+            "Image Style": ""
+        }
+        Text:
+        $cleanPlainText
+    "@
+    
+        $body = @{
+            model = $model
+            messages = @(
+                @{
+                    role = "user"
+                    content = $prompt
+                }
+            )
+            temperature = 0
+        } | ConvertTo-Json -Depth 4 -Compress
+    
+        try {
+            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Headers $headers -Method Post -Body $body
+            $retString = $response.choices[0].message.content
+            $parsedString = $retString.Replace('```json','').Replace('```]','').Replace('```','')
+            $jsonReturn = $parsedString | ConvertFrom-Json
+            return $jsonReturn
+        }
+        catch {
+            Write-Host "Error calling ChatGPT API: $_"
+            return $null
+        }
+    }
+    
+    function Clear-ExtractedContentFromSitecore($item) {
+        $item.Editing.BeginEdit()
+        try {
+            $item["Brand Purpose"]              = ""
+            $item["Brand History"]              = ""
+            $item["Brand Benefits"]             = ""
+            $item["Brand Context"]              = ""
+            $item["Brand Beliefs and Benefits"] = ""
+            $item["Tone of Voice"]              = ""
+            $item["Visual guidance"]            = ""
+            $item["Image Style"]                = ""
+            Write-Host "Item cleaned successfully: $($item.Paths.FullPath)"
+        }
+        catch {
+            Write-Host "Error cleaning item $($item.Paths.FullPath): $_"
+        }
+        finally {
+            $item.Editing.EndEdit()
+        }
+    }
+    
+    function Save-ExtractedContentToSitecore($item, $content) {
+        $item.Editing.BeginEdit()
+        try {
+            $item["Brand Purpose"]              += $content."Brand Purpose"
+            $item["Brand History"]              += $content."Brand History"
+            $item["Brand Benefits"]             += $content."Brand Benefits"
+            $item["Brand Context"]              += $content."Brand Context"
+            $item["Brand Beliefs and Benefits"] += $content."Brand Beliefs and Benefits"
+            $item["Tone of Voice"]              += $content."Tone of Voice"
+            $item["Visual guidance"]            += $content."Visual guidance"
+            $item["Image Style"]                += $content."Image Style"
+            Write-Host "Item updated successfully: $($item.Paths.FullPath)"
+        }
+        catch {
+            Write-Host "Error updating item $($item.Paths.FullPath): $_"
+        }
+        finally {
+            $item.Editing.EndEdit()
+        }
+    }
+    
+    function Get-PlainTextFromPdf() {
+        param( 
+            [System.IO.Stream]$mediaStream,
+            [string]$fileName
+        )
+    
+        try {
+            # Copy the PDF stream to a temporary file to avoid memory stream issues
+            $tempFilePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), $fileName)
+            $tempFile = [System.IO.File]::Create($tempFilePath)
+            $mediaStream.CopyTo($tempFile)
+            $tempFile.Close()
+    
+            $pdf = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $tempFilePath
+            
+            # Initialize the $plainText variable before usage
+            $plainText = New-Object System.Text.StringBuilder
+            
+        	for ($page = 1; $page -le $pdf.NumberOfPages; $page++){
+    	    	$text=[iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($pdf,$page)
+    	  	    [void]$plainText.AppendLine($text)
+    	    }	
+    	   
+    	    $pdf.Close()
+    	    
+    	    # Optionally remove the temporary file after extraction
+            Remove-Item -Path $tempFilePath -Force
+           
+            Write-Host  $plainText.ToString()
+            return $plainText.ToString()
+           
+        }
+        catch {
+            Write-Host "Error extracting text from PDF: $_"
+            if ($_.Exception.InnerException) {
+                Write-Host "Inner Exception Details: $($_.Exception.InnerException.Message)"
+            }
+            return $null
+        }
+    }
+    
     function Get-SerializedItem() {
         param(
             $contextItem
@@ -32,46 +179,65 @@ SharedFields:
         return $serialized
     }
     
-    function Get-FieldValue(){
-        param( $item, $fieldName, $defaultValue = "" )
-        $field = $item.Fields[$fieldName]
-        if ($field -eq $null){
-            return $defaultValue
-        }
-        return $field.Value
+    function Convert-MarkdownToHtml(){
+        param( $markdownText )
+        [System.Reflection.Assembly]::LoadWithPartialName("MarkdownSharp") | Out-Null
+        $markdown = New-Object MarkdownSharp.Markdown
+        $html = $markdown.Transform($markdownText)
+        $html = $html -replace "<strong>", "<b>" -replace "</strong>", "</b>"
+        return $html
     }
     
-    function Get-MessageFromGpt(){
-        param( $system, $message, $apiKey, $model)
-        
+    function Check-TextCompliance($serializedItem, $serializedAssistant, $serializedDocs, $apiKey, $model) {
         $headers = @{
-            "Content-Type" = "application/json"
-            "Authorization" = "Bearer $($apiKey)"
+            "Authorization" = "Bearer $apiKey"
+            "Content-Type"  = "application/json"
         }
-        $requestData = @{
+    
+        # Remove special characters from plainText
+        $cleanPlainText = $plainText -replace '[^\w\s.,-]', ''
+    
+        $prompt = @"
+        Giving this Brand Information:
+        ---
+        $serializedAssistant
+        ---
+        
+        Check if the following text complies with the brand guidelines above
+        ---
+        $serializedItem
+        ---
+    "@
+    
+    $system = @"
+        - Only mention the things that are not compliant
+        - At the top of the answer you must provide a ranking between 0 and 10, 0 = totally non-compliant and 10 = totally compliant
+        - Write the ranking using this format: "Compliance score: 5/10"
+    "@
+        $body = @{
             model = $model
             messages = @(
                 @{
                     role = "system"
                     content = $system
-                },
+                }
                 @{
                     role = "user"
-                    content = $message
+                    content = $prompt
                 }
             )
-            max_tokens = 1000
-        }
-        $body = $requestData | ConvertTo-Json -Depth 3
-        
+            temperature = 0
+        } | ConvertTo-Json -Depth 10 -Compress
+    
         try {
-            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Method Post -Headers $headers -Body $body
-            $responseData = $response.choices[0].message.content
-            return $responseData
+            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Headers $headers -Method Post -Body $body
+            $retString = $response.choices[0].message.content
+            return $retString
         }
         catch {
+            Write-Host "Error calling ChatGPT API: $_"
             return $null
-        }    
+        }
     }
 Languages:
 - Language: en
@@ -91,11 +257,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "2abab21a-bbb7-4e51-943b-5858e53bbf48"
+      Value: "856602d3-68c4-4d9d-92ef-2f5a48dc2109"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\rpeplau
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T052935Z
+      Value: 20250308T192909Z
