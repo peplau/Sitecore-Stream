@@ -1,0 +1,29 @@
+{
+  "namespace": "SitecoreFlow.Master",
+  "description": "Serializes the master db items for the Sitecore Flow Module",
+  "items": {
+    "includes": [
+      {
+        "allowedPushOperations": "CreateAndUpdate",
+        "database": "master",
+        "name": "System.Modules.SitecoreFlow",
+        "path": "/sitecore/system/Modules/Sitecore Flow",
+        "scope": "itemAndDescendants"
+      },
+      {
+        "allowedPushOperations": "CreateAndUpdate",
+        "database": "master",
+        "name": "Templates.Foundation.SitecoreFlow",
+        "path": "/sitecore/templates/Foundation/Sitecore Flow",
+        "scope": "itemAndDescendants"
+      },
+      {
+        "allowedPushOperations": "CreateAndUpdate",
+        "database": "master",
+        "name": "Sitecore.templates.Feature.SitecoreFlow",
+        "path": "/sitecore/templates/Feature/Sitecore Flow",
+        "scope": "itemAndDescendants"
+      }
+    ]
+  }
+}
