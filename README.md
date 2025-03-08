@@ -40,7 +40,7 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 
 ### Configuration
-1. Configure the API Key on "/sitecore/system/Modules/Sitecore Flow/Settings", also selecthe the desired model.
+1. Configure the API Key on "/sitecore/system/Modules/Sitecore Flow/Settings", also select the desired model.
 2. Go to /sitecore/system/Modules/Sitecore Flow/Assistants
 3. Right click on the item "Assistants" and create a new item "Style Guide"
 4. Give a name of a brand "ex" My brand, can be your famous home beer company . or ex a good one like "Heineken"
