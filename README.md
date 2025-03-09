@@ -65,7 +65,7 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 ### Analyze Content
 
-You can verify quickly analyze your content to verify if it matches the guidelines of your brand using our Brand-Aware Assistant.
+You can quickly analyze your content to verify if it matches the guidelines of your brand using our Brand-Aware Assistant.
 
 1. Select any content item to be analyzed (it has to be under /sitecore/content)
 2. Under the Ribbon "ANALYZE", click the button "Analyze Content"
