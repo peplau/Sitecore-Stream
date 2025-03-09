@@ -37,7 +37,6 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 - [OpenAI API Key](CreatingAPIKeys.md)
 - itextsharp.dll (included in the package)
 
-
 ## Installation instructions
 
 1. Use the Sitecore Installation wizard to install the [package Sitecore Flow-1.0.zip](/dist/Sitecore Flow-1.0.zip) - In case of any conflicts, select Merge/Merge
