@@ -21,11 +21,21 @@
         <x-item>/master/sitecore/media library/heineken-Brand_guidelines_pdf/{FFE8A430-09AA-4232-8FC6-FB269AFC5131}/invariant/0</x-item>
         <x-item>/master/sitecore/system/Modules/Sitecore Flow/Assistants/Heineken/{21AAEFEB-EB5D-440D-AC4D-7F90E41399E9}/invariant/0</x-item>
         <x-item>/master/sitecore/system/Modules/Sitecore Flow/Assistants/Heineken/Brand Guidelines/{739FA1D1-7883-4513-ABDC-61A130674E33}/invariant/0</x-item>
+        <x-item>/master/sitecore/content/Home/We are HEINEKEN/{E36D25A1-EE8E-47AE-B3EB-EC832ABCB2A5}/invariant/0</x-item>
       </Entries>
       <SkipVersions>False</SkipVersions>
       <Converter>
         <ItemToEntryConverter>
-          <Transforms />
+          <Transforms>
+            <InstallerConfigurationTransform>
+              <Options>
+                <BehaviourOptions>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
+                </BehaviourOptions>
+              </Options>
+            </InstallerConfigurationTransform>
+          </Transforms>
         </ItemToEntryConverter>
       </Converter>
       <Include />
