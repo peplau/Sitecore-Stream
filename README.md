@@ -69,8 +69,11 @@ You can quickly analyze your content to verify if it matches the guidelines of y
 
 1. Select any content item to be analyzed (it has to be under /sitecore/content)
 2. Under the Ribbon "ANALYZE", click the button "Analyze Content"
-3. Select the Assistant you want to use (Eg: Heineken)
-4. Wait for the results, you will receive a diagnostic of your content
+   ![Button Analyze Content](docs/images/analyze-button.gif)
+3. Select the Assistant you want to use (Eg: Heineken).
+   ![Assistant Selection](docs/images/assistant-dialog.gif)
+5. Wait for the results, you will receive a diagnostic of your content
+   ![Analysis Results](docs/images/analysis-results.gif)
 
 ### Chat With Assistant
 
