@@ -56,11 +56,9 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 ## Usage instructions
 
-⟹ Provide documentation about your module, how do the users use your module, where are things located, what do the icons mean, are there any secret shortcuts etc.
-
-Include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
 
 **Chat With Assistant**
+
 Chat With Assistant feature allows the content author chat about the selected assistant.
 
 1) This option is available on the ribbon on the "ANALYZE" tab as "Assistant Chat" button.
