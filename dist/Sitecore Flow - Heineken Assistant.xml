@@ -1,0 +1,44 @@
+<project>
+  <Metadata>
+    <metadata>
+      <PackageName>Sitecore Flow - Heineken Assistant</PackageName>
+      <Author>Go Horse</Author>
+      <Version>1.0</Version>
+      <Revision />
+      <License />
+      <Comment />
+      <Attributes />
+      <Readme />
+      <Publisher />
+      <PostStep />
+      <PackageID />
+    </metadata>
+  </Metadata>
+  <SaveProject>True</SaveProject>
+  <Sources>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/media library/heineken-Brand_guidelines_pdf/{FFE8A430-09AA-4232-8FC6-FB269AFC5131}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Assistants/Heineken/{21AAEFEB-EB5D-440D-AC4D-7F90E41399E9}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Sitecore Flow/Assistants/Heineken/Brand Guidelines/{739FA1D1-7883-4513-ABDC-61A130674E33}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Heineken Assistant</Name>
+    </xitems>
+  </Sources>
+  <Converter>
+    <TrivialConverter>
+      <Transforms />
+    </TrivialConverter>
+  </Converter>
+  <Include />
+  <Exclude />
+  <Name />
+</project>
