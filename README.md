@@ -45,20 +45,27 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 ### Configuration
 
 1. Configure the API Key on "/sitecore/system/Modules/Sitecore Flow/Settings", also select the desired model.
-2. Go to /sitecore/system/Modules/Sitecore Flow/Assistants
-3. Right click on the item "Assistants" and create a new item "Style Guide"
-4. Give a name of a brand "ex" My brand, can be your famous home beer company . or ex a good one like "Heineken"
-5. On this Sitecore field , Upload the Style guide.
-6. Click on the 'Heineken Item" and on the ribbon "Analyze", click -> 'Process all changes"
-7. Check all the fields being filled
+
+### Training your Assistant
+
+**This step can be skipped if you opted to install the package Sitecore Flow - Heineken Assistant-1.0.zip**
+
+1. Go to /sitecore/system/Modules/Sitecore Flow/Assistants
+2. Right click on the item "Assistants" and create a new item "Style Guide"
+3. Give a name of a brand "ex" My brand, can be your famous home beer company . or ex a good one like "Heineken"
+4. On this Sitecore field , Upload the Style guide.
+5. Click on the 'Heineken Item" and on the ribbon "Analyze", click -> 'Process all changes"
+6. Check all the fields being filled
 
 ![configuration](docs/images/configuration.gif?raw=true "configuration")
 
 ## Usage instructions
 
+⟹ Provide documentation about your module, how do the users use your module, where are things located, what do the icons mean, are there any secret shortcuts etc.
+
+Include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
 
 **Chat With Assistant**
-
 Chat With Assistant feature allows the content author chat about the selected assistant.
 
 1) This option is available on the ribbon on the "ANALYZE" tab as "Assistant Chat" button.
