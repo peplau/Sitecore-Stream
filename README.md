@@ -63,6 +63,15 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 ## Usage instructions
 
+### Analyze Content
+
+You can verify quickly analyze your content to verify if it matches the guidelines of your brand using our Brand-Aware Assistant.
+
+1. Select any content item to be analyzed (it has to be under /sitecore/content)
+2. Under the Ribbon "ANALYZE", click the button "Analyze Content"
+3. Select the Assistant you want to use (Eg: Heineken)
+4. Wait for the results, you will receive a diagnostic of your content
+
 ### Chat With Assistant
 
 Chat With Assistant feature allows marketers to chat with the selected assistant.
