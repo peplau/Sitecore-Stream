@@ -55,6 +55,16 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 Include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
 
+**Chat With Assistant**
+Chat With Assistant feature allows the content author chat about the selected assistant.
+
+1) This option is available on the ribbon on the "ANALYZE" tab as "Assistant Chat" button.
+
+![Assistant Chat button](docs/images/assistant-chat-button.png)
+
+2) Click on the "Assistant Chat" button then select the Assistant on popup opened.
+
+![sitecore-flow-Chat-Assistant](docs/images/sitecore-flow-chat-assistant.gif)
 
 ## Comments
 This module significantly streamlines brand management by integrating AI directly into the content editing workflow. It provides immediate feedback by comparing content against brand guidelines, ensuring consistent branding across all channels. Future enhancements could include expanding AI recommendations for content optimization or integrating additional file formats for style guides.
