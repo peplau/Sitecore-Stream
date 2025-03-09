@@ -28,8 +28,8 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 ## Compatibility
 
-- Sitecore XP
-- Sitecore XM
+- Sitecore XP 10.4
+- Sitecore XM 10.4
 
 ## Pre-requisites and Dependencies
 
@@ -40,7 +40,8 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 ## Installation instructions
 
-1. Use the Sitecore Installation wizard to install the [package](#link-to-package)
+1. Use the Sitecore Installation wizard to install the [package Sitecore Flow-1.0.zip](/dist/Sitecore Flow-1.0.zip) - In case of any conflicts, select Merge/Merge
+2. (Optional) For your convenience, we have prepared a package with the Heineken Assistant pre-trained. After installing the package above, please also install [package Sitecore Flow-1.0.zip](/dist/Sitecore Flow-1.0.zip). Again, in case of conflicts, select Merge/Merge
 
 ### Configuration
 
