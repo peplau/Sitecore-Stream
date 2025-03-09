@@ -52,7 +52,7 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 **⟹ This step can be skipped if you opted to install the package Sitecore Flow - Heineken Assistant-1.0.zip**
 
 1. Go to /sitecore/system/Modules/Sitecore Flow/Assistants
-2. Right click on the folder "Assistants" and create a item of type Assistant
+2. Right click on the folder "Assistants" and create an item of type Assistant
 3. Give a name for your Asssistant (Eg: "Heineken")
 4. Under your assistant, right click again to create a new Document item
 5. In the Document field, Upload and select your document **(Only PDFs are supported)**.
@@ -63,12 +63,9 @@ This module integrates advanced AI into your Sitecore platform, helping your mar
 
 ## Usage instructions
 
-⟹ Provide documentation about your module, how do the users use your module, where are things located, what do the icons mean, are there any secret shortcuts etc.
+### Chat With Assistant
 
-Include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
-
-**Chat With Assistant**
-Chat With Assistant feature allows the content author chat about the selected assistant.
+Chat With Assistant feature allows marketers to chat with the selected assistant.
 
 1) This option is available on the ribbon on the "ANALYZE" tab as "Assistant Chat" button.
 
