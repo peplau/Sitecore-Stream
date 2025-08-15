@@ -1,0 +1,1 @@
+dotnet sitecore login --authority https://sc104identityserver.dev.local --cm https://sc104sc.dev.local --allow-write true --client-id Device
