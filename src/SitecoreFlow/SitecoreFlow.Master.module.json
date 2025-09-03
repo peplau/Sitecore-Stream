@@ -50,7 +50,11 @@
       {
         "fieldID": "{2E8766CE-35F4-4674-9C35-DC1CEA8A66CD}",
         "description": "API Key"
-      }
+      },
+      {
+        "fieldID": "{301DB262-65CF-4917-A76E-1D306F7AE16E}",
+        "description": "Connect API Token"
+      }      
     ]
   }
 }

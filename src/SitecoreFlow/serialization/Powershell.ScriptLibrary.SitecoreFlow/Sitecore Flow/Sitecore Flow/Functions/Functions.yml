@@ -40,46 +40,25 @@ SharedFields:
         return $cleanPlainText
     }
     
-    function Invoke-ChatGptExtraction($plainText, $apiKey, $model) {
+    function Invoke-ChatGptExtraction($plainText, $apiKey, $model, $connectApiToken) {
+        $pair = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($SitecoreFlow_Collection_Username+":"+$connectApiToken))
         $headers = @{
-            "Authorization" = "Bearer $apiKey"
+            "apiKey" = $apiKey
+            "Authorization" = "Basic $pair"
             "Content-Type"  = "application/json"
         }
     
         # Remove special characters from plainText
         $cleanPlainText = CleanString $plainText
     
-        $prompt = @"
-        Extract the following information about the brand from the text below as JSON: {
-            "Brand Purpose": "", 
-            "Brand History": "",
-            "Brand Benefits": "",
-            "Brand Context": "",
-            "Brand Beliefs and Benefits": "",
-            "Tone of Voice": "",        // Brand Tone of Voice (not the document)
-            "Visual guidance": "",
-            "Image Style": ""
-        }
-        Text:
-        $cleanPlainText
-    "@
         $body = @{
+            plainText = $cleanPlainText
             model = $model
-            messages = @(
-                @{
-                    role = "user"
-                    content = $prompt
-                }
-            )
-            temperature = 0
-        } | ConvertTo-Json -Depth 100 -Compress
+        } | ConvertTo-Json -Depth 10 -Compress
     
         try {
-            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Headers $headers -Method Post -Body $body
-            $retString = $response.choices[0].message.content
-            $parsedString = $retString.Replace('```json','').Replace('```]','').Replace('```','')
-            $jsonReturn = $parsedString | ConvertFrom-Json
-            return $jsonReturn
+            $response = Invoke-RestMethod -Uri $SitecoreFlow_ExtractContentWithAI_URL -Headers $headers -Method Post -Body $body
+            return $response
         }
         catch {
             Write-Host "Error calling ChatGPT API: $_"
@@ -112,14 +91,14 @@ SharedFields:
     function Save-ExtractedContentToSitecore($item, $content) {
         $item.Editing.BeginEdit()
         try {
-            $item["Brand Purpose"]              += $content."Brand Purpose"
-            $item["Brand History"]              += $content."Brand History"
-            $item["Brand Benefits"]             += $content."Brand Benefits"
-            $item["Brand Context"]              += $content."Brand Context"
-            $item["Brand Beliefs and Benefits"] += $content."Brand Beliefs and Benefits"
-            $item["Tone of Voice"]              += $content."Tone of Voice"
-            $item["Visual guidance"]            += $content."Visual guidance"
-            $item["Image Style"]                += $content."Image Style"
+            $item["Brand Purpose"]              += $content."Brand_Purpose"
+            $item["Brand History"]              += $content."Brand_History"
+            $item["Brand Benefits"]             += $content."Brand_Benefits"
+            $item["Brand Context"]              += $content."Brand_Context"
+            $item["Brand Beliefs and Benefits"] += $content."Brand_Beliefs_and_Benefits"
+            $item["Tone of Voice"]              += $content."Tone_of_Voice"
+            $item["Visual guidance"]            += $content."Visual_guidance"
+            $item["Image Style"]                += $content."Image_Style"
             Write-Host "Item updated successfully: $($item.Paths.FullPath)"
         }
         catch {
@@ -198,50 +177,23 @@ SharedFields:
         return $html
     }
     
-    function Check-TextCompliance($serializedItem, $serializedAssistant, $serializedDocs, $apiKey, $model) {
+    function Check-TextCompliance($serializedItem, $serializedAssistant, $apiKey, $model, $connectApiToken) {
+        $pair = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($SitecoreFlow_Collection_Username+":"+$connectApiToken))
+        
         $headers = @{
-            "Authorization" = "Bearer $apiKey"
-            "Content-Type"  = "application/json"
+            "apiKey" = $apiKey
+            "Authorization" = "Basic $pair"
         }
     
-        # Remove special characters from plainText
-        $cleanPlainText = CleanString $plainText
-    
-        $prompt = @"
-        Giving this Brand Information:
-        ---
-        $serializedAssistant
-        ---
-        
-        Check if the following text complies with the brand guidelines above
-        ---
-        $serializedItem
-        ---
-    "@
-    
-    $system = @"
-        - Only mention the things that are not compliant
-        - At the top of the answer you must provide a ranking between 0 and 10, 0 = totally non-compliant and 10 = totally compliant
-        - Write the ranking using this format: "Compliance score: 5/10"
-    "@
         $body = @{
+            content = $serializedItem
+            brandGuidelines = $serializedAssistant
             model = $model
-            messages = @(
-                @{
-                    role = "system"
-                    content = $system
-                }
-                @{
-                    role = "user"
-                    content = $prompt
-                }
-            )
-            temperature = 0
         } | ConvertTo-Json -Depth 10 -Compress
     
         try {
-            $response = Invoke-RestMethod -Uri "https://api.openai.com/v1/chat/completions" -Headers $headers -Method Post -Body $body
-            $retString = $response.choices[0].message.content
+            $response = Invoke-RestMethod -Uri $SitecoreFlow_CheckBrandCompliance_URL -Headers $headers -Method Post -Body $body
+            $retString = $response
             return $retString
         }
         catch {
@@ -267,11 +219,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "e1df5972-f86d-49d2-97e6-76cdb241c796"
+      Value: "dc97ead7-c00e-4dfd-a4f1-423ed0e0f471"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\rpeplau
+        sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T222223Z
+      Value: 20250903T151135Z

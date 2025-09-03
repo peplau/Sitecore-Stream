@@ -21,6 +21,13 @@ SharedFields:
         Close-Window
     }
     
+    # 0.2.1 - Get Connect API Token - No Connect API Token is set
+    $connectApiToken = Get-FieldValue $settingsItem $SitecoreFlow_ConnectApiToken_FieldName $null
+    if ([string]::IsNullOrEmpty($connectApiToken) -eq $null){
+        Write-Log "[Sitecore Flow] You must setup your 'Connect API Token' at the Settings item in /sitecore/system/Modules/Sitecore Flow/Settings" -Log Error
+        Close-Window
+    }
+    
     # 0.3 - Get Model - No Model is set
     $modelField = [Sitecore.Data.Fields.ReferenceField]$settingsItem.Fields[$SitecoreFlow_Model_FieldName]
     if ($modelField -eq $null){
@@ -55,11 +62,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "0cb3a42b-9b1e-4fa4-8454-71b160b1355a"
+      Value: "c19fc064-6bbe-48b1-a33e-9cb124d1415c"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\rpeplau
+        sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T051306Z
+      Value: 20250903T150634Z

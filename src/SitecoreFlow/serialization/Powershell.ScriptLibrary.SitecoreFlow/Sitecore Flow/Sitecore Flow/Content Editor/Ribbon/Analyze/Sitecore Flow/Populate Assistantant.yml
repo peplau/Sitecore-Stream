@@ -68,7 +68,7 @@ SharedFields:
                 }
     
                 # Call ChatGPT function to extract specific information
-                $chatGptContent = Invoke-ChatGptExtraction -plainText $plainText -apiKey $apiKey -model $model
+                $chatGptContent = Invoke-ChatGptExtraction -plainText $plainText -apiKey $apiKey -model $model -connectApiToken $connectApiToken
     
                 if ($chatGptContent) {
                     # Save extracted fields to Assistant item
@@ -80,7 +80,6 @@ SharedFields:
             }
         }
     }
-    
 Languages:
 - Language: en
   Versions:
@@ -99,11 +98,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "378c6993-5d93-4809-a10d-fbc40fa93fb4"
+      Value: "f91a1a24-3d4f-49ef-b341-ad35809e1e8f"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\rpeplau
+        sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T205350Z
+      Value: 20250903T150807Z
