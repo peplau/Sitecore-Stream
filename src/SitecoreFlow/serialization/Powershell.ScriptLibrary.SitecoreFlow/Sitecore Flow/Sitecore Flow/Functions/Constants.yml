@@ -11,6 +11,7 @@ SharedFields:
     $SitecoreFlow_Settings_TemplateID = "{007AA058-0215-4A4F-916C-2A163D26E678}" 
     $SitecoreFlow_Settings_Path = "/sitecore/system/Modules/Sitecore Flow/Settings" 
     $SitecoreFlow_ApiKey_FieldName = "API Key" 
+    $SitecoreFlow_ConnectApiToken_FieldName = "Connect API Token" 
     $SitecoreFlow_Model_FieldName = "Model" 
     $SitecoreFlow_ModelKey_FieldName = "Model Key"
     
@@ -23,6 +24,13 @@ SharedFields:
     
     # Media
     $SitecoreFlow_Pdf_TemplateID = "{0603F166-35B8-469F-8123-E8D87BEDC171}"
+    
+    # API Platform - Sitecore Flow Endpoints
+    $SitecoreFlow_ExtractTextFromDocument_URL = "https://apim.workato.com/arke/sitecore-flow-v1/extract-text-from-document"
+    $SitecoreFlow_Collection_Username = "api-token"
+    $SitecoreFlow_CheckBrandCompliance_URL = "https://apim.workato.com/arke/sitecore-flow-v1/check-brand-compliance"
+    $SitecoreFlow_ExtractContentWithAI_URL = "https://apim.workato.com/arke/sitecore-flow-v1/extract-content-with-ai"
+    
 Languages:
 - Language: en
   Versions:
@@ -41,11 +49,11 @@ Languages:
         sitecore\rpeplau
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "7cbb4c40-c0c0-4f2b-85ac-418d9f302af4"
+      Value: "0dedef4c-bcba-43f6-b686-d8e98893b107"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\rpeplau
+        sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250308T180206Z
+      Value: 20250903T151116Z
